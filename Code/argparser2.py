@@ -1,9 +1,9 @@
 # -*- coding: utf-8 -*-
 
 import pandas as pd
+from ML_methods import *
 
 def arg_parser():
-    '''arg parser'''
     import argparse
     parser = argparse.ArgumentParser(description='Use -i to specify the input file, use -o to specify the output file, use -t to specify the type of required ML method, use -h to see the help')
     parser.add_argument('-i', '--input', help='Input file', required=True)
@@ -19,17 +19,12 @@ ML_type = arg_parser().type
 with open(filepath, 'r') as f:
     data = f.read()
 
-def LinearRegression():
-        from sklearn import linear_model
-        data = pd.read_csv(filepath)
-        regr = linear_model.LinearRegression()
-        X = ['x1', 'x2', 'x3'] #independent variables
-        y = 'biomarkers' #dependent variable
-        regr.fit(X, y)
-
 def switch(ML_type):
     if ML_type == 'LinearRegression':
-        return LinearRegression()
+        return LinearRegression(data)
+
+    else:
+        print('Wrong ML type')
         '''
     elif ML_type == 'LogisticRegression':
         return LogisticRegression()
@@ -48,9 +43,6 @@ def switch(ML_type):
     elif ML_type == 'LGBM':
         return LGBM()
         '''
-    else:
-        print('Wrong ML type')
-
 switch(ML_type)
 
 
