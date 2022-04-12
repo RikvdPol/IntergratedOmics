@@ -6,6 +6,11 @@ __pycache__/
 #Datafolder
 Data/*
 
+#Results
+Results/*
+
+#Logfiles
+Logfiles/*
 
 # C extensions
 *.so
