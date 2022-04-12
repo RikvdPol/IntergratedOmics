@@ -17,19 +17,25 @@ class Reader:
 
     def reader(self, file):
         """"
-        Read a file and store in variable.
+        Read a file and print the first five rows.
         """
-        data = pd.read_csv(file, sep="\t")
-        print(data.head())
+        try:
+            data = pd.read_csv(file, sep="\t")
+            logging.basicConfig(filename='../Logfiles/reader.log', filemode='a', format='%(asctime)s %(message)s')
+            logging.warning(f'Reading of {args.f} successful')
+            print(data.head())
+        except FileNotFoundError as e:
+            logging.basicConfig(filename='../Logfiles/reader.log', filemode='a', format='%(asctime)s %(message)s')
+            logging.warning(f'{e}: Reading of {args.f} unsuccessful')
 
 
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", help="File to be read", type=str, required=True)
     parser.add_argument("-head", help="Confirm if a header exists in the file", type=int, required=True)
+    parser.add_argument("-output", help="Output file", type=str, required=True)
     args = parser.parse_args()
     read = Reader()
     read.reader(args.f)
     print("Input file: %s" % args.f)
-    logging.basicConfig(filename='../Logfiles/reader.log', filemode='w', format='%(asctime)s %(message)s')
-    logging.warning(f'Reading of {args.f} successful')
+
