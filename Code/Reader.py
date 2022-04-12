@@ -22,11 +22,11 @@ class Reader:
         try:
             data = pd.read_csv(file, sep="\t")
             logging.basicConfig(filename='../Logfiles/reader.log', filemode='a', format='%(asctime)s %(message)s')
-            logging.warning(f'Reading of {args.f} successful')
+            logging.warning(f'Reading of {file} successful')
             print(data.head())
         except FileNotFoundError as e:
             logging.basicConfig(filename='../Logfiles/reader.log', filemode='a', format='%(asctime)s %(message)s')
-            logging.warning(f'{e}: Reading of {args.f} unsuccessful')
+            logging.warning(f'{e}: Reading of {file} unsuccessful')
 
 
 if __name__ == "__main__":
