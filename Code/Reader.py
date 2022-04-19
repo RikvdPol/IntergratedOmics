@@ -24,7 +24,7 @@ class Reader:
             data = pd.read_csv(file, sep="\t")
             logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log', filemode='a+', format='%(asctime)s %(message)s')
             logging.warning(f'Reading of {file} successful')
-            print(data.head())
+            return data
         except FileNotFoundError as e:
             logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log', filemode='a+', format='%(asctime)s %(message)s')
             logging.warning(f'{e}: Reading of {file} unsuccessful')
