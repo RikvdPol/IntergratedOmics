@@ -12,6 +12,9 @@ Results/*
 #Logfiles
 Logfiles/*
 
+#Folder containing algorithms for practice
+Algorithms/*
+
 # C extensions
 *.so
 

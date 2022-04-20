@@ -1,20 +1,20 @@
 import pandas as pd
 import numpy as np
 
-cova = pd.read_csv("Covariates.csv", sep="\t")
-meta = pd.read_csv("MetaPhlan3.csv", sep="\t")
-link = pd.read_csv("Olink.csv", sep="\t")
-phip = pd.read_csv("PhipSeq.csv", sep="\t")
-plasma = pd.read_csv("PlasmaMetabolomics.csv", sep="\t")
+# cova = pd.read_csv("../../Data/Covariates.csv", sep="\t")
+# meta = pd.read_csv("../../Data/MetaPhlan3.csv", sep="\t")
+# link = pd.read_csv("../../Data/Olink.csv", sep="\t")
+# phip = pd.read_csv("../../Data/PhipSeq.csv", sep="\t")
+# plasma = pd.read_csv("../../Data/PlasmaMetabolomics.csv", sep="\t")
 
 
 class EDA:
     def reader(self):
-        self.cova = pd.read_csv("Covariates.csv", sep="\t")
-        self.meta = pd.read_csv("MetaPhlan3.csv", sep="\t")
-        self.link = pd.read_csv("Olink.csv", sep="\t")
-        self.phip = pd.read_csv("PhipSeq.csv", sep="\t")
-        self.plasma = pd.read_csv("PlasmaMetabolomics.csv", sep="\t")
+        self.cova = pd.read_csv("../../Data/Covariates.csv", sep="\t")
+        self.meta = pd.read_csv("../../Data/MetaPhlan3.csv", sep="\t")
+        self.link = pd.read_csv("../../Data/Olink.csv", sep="\t")
+        self.phip = pd.read_csv("../../Data/PhipSeq.csv", sep="\t")
+        self.plasma = pd.read_csv("../../Data/PlasmaMetabolomics.csv", sep="\t")
 
     def dimensions(self):
         print("Covariates rows and columns: \n", self.cova.shape, "\n")
@@ -29,6 +29,7 @@ class EDA:
 
     def get_covariates(self):
         print(self.cova)
+        print(self.cova.dtypes)
 
     def get_meta(self):
         print(self.meta)
@@ -41,7 +42,6 @@ class EDA:
 
     def get_plasma(self):
         print(self.plasma)
-
 
 
 
