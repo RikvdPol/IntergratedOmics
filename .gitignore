@@ -19,6 +19,7 @@ Algorithms/*
 *.so
 
 # Distribution / packaging
+.idea/*
 .Python
 build/
 develop-eggs/
