@@ -1,6 +1,6 @@
 import argparse
 import Reader
-import ElasticNet
+import Elasticnet
 
 
 if __name__ == "__main__":
@@ -11,6 +11,6 @@ if __name__ == "__main__":
     args = parser.parse_args()
     read = Reader.Reader()
     data = read.reader(args.f)
-    algorithm = ElasticNet.ElasticNet(data, "BMI")
+    algorithm = Elasticnet.Elasticnet(data, "BMI")
     algorithm.extract_labels()
     print("Input file: %s" % args.f)
