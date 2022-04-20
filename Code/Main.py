@@ -3,8 +3,6 @@ import Reader
 import ElasticNet
 
 
-
-
 if __name__ == "__main__":
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", help="File to be read", type=str, required=True)

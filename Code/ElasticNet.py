@@ -7,4 +7,3 @@ class ElasticNet:
     def extract_labels(self):
         self.labels = self.file[self.labelname]
         print(self.labels)
-git
