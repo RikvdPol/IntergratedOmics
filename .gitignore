@@ -6,11 +6,20 @@ __pycache__/
 #Datafolder
 Data/*
 
+#Results
+Results/*
+
+#Logfiles
+Logfiles/*
+
+#Folder containing algorithms for practice
+Algorithms/*
 
 # C extensions
 *.so
 
 # Distribution / packaging
+.idea/*
 .Python
 build/
 develop-eggs/

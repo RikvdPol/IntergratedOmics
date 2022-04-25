@@ -1,6 +1,5 @@
 import pandas as pd
-import numpy as np
-import argparse
+import os
 import logging
 
 __author__ = "Rik van de Pol"
@@ -13,28 +12,22 @@ class Reader:
     """"
     Simple reader class that reads a file.
     """
+
     def __init__(self):
         pass
 
     def reader(self, file):
         """"
-        Read a file and store in variable.
+        Read a file and print the first five rows.
         """
-        with open(file) as f:
-            data = f.read()
-
-        for line in data:
-            print(line)
-
-    def test(self):
-        print("Hoi")
-
-
-if __name__ == "__main__":
-    parser = argparse.ArgumentParser()
-    parser.add_argument("-f", help="File to be read", type=str, required=True)
-    args = parser.parse_args()
-    read = Reader()
-    read.reader(args.f)
-    read.test()
-    print("Input file: %s" % args.f)
+        sep = os.path.sep
+        try:
+            data = pd.read_csv(file, sep="\t")
+            logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log', filemode='a+',
+                                format='%(asctime)s %(message)s')
+            logging.warning(f'Reading of {file} successful')
+            return data
+        except FileNotFoundError as e:
+            logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log', filemode='a+',
+                                format='%(asctime)s %(message)s')
+            logging.warning(f'{e}: Reading of {file} unsuccessful')
