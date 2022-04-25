@@ -21,6 +21,8 @@ class Reader:
         Read a file and print the first five rows.
         """
         sep = os.path.sep
+        if not os.path.exists(f'..{sep}Logfiles'):
+            os.makedirs(f'..{sep}Logfiles')
         try:
             data = pd.read_csv(file, sep="\t")
             logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log', filemode='a+',
