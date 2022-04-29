@@ -6,7 +6,7 @@ from xgboost import XGBRegressor
 from sklearn.model_selection import train_test_split
 from sklearn.metrics import accuracy_score
 # load data
-#dataset = np.loadtxt('Code/Data/Covariates.csv', delimiter="\S+")
+
 dataset = pd.read_csv('Code/Data/Covariates.csv', delimiter="\s+")
 # split data into X and y
 print(dataset.BMI)
