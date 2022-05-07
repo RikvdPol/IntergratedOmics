@@ -2,6 +2,9 @@ from sklearn.model_selection import cross_val_score
 from sklearn.model_selection import RepeatedKFold
 from sklearn.linear_model import ElasticNet
 import numpy as np
+import logging
+import sys
+import os
 
 
 class Elasticnet:
@@ -11,8 +14,19 @@ class Elasticnet:
         self.labels = None
 
     def extract_labels(self):
+        sep = os.path.sep
         self.file = self.file.dropna(axis=0)
-        self.labels = self.file[self.labelname]
+        try:
+            self.labels = self.file[self.labelname]
+
+        except KeyError as e:
+            logging.basicConfig(filename=f'..{sep}Logfiles{sep}ElasticNet.log',
+                                filemode='a+',
+                                format='%(asctime)s %(message)s',
+                                force=True)
+            logging.warning(f'{e}: Labelname {self.labelname} not present in data')
+            sys.exit(0)
+
         self.file = self.file.drop([self.labelname, "Pseudo", "Antibody_batch"], axis=1)
         # print(self.labels)
 
