@@ -17,6 +17,9 @@ def main():
     read = Reader.Reader()
     data = read.reader(args.f)
 
+#TODO upper en lower inputs
+#TODO let user define which labels are of interest
+
     if args.ML_type == "Elasticnet":
         try: 
             algorithm = Elasticnet.Elasticnet(data, 'BMI')
@@ -31,8 +34,8 @@ def main():
             print("Error: XG failed")
             sys.exit(1)
 
-        algorithm = xgboost_algorithm.XG(data, 'BMI')
-        algorithm.XG_boost(data, 'BMI')
+        #algorithm = xgboost_algorithm.XG(data, 'BMI')
+        #algorithm.XG_boost(data, 'BMI')
 
     elif args.ML_type == "etcetera":
         print("etcetera")
