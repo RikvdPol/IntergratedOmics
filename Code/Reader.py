@@ -1,6 +1,6 @@
 import pandas as pd
 import os
-import logging
+import Logging
 import sys
 
 __author__ = "Rik van de Pol"
@@ -25,21 +25,18 @@ class Reader:
         sep = os.path.sep
         if not os.path.exists(f'..{sep}Logfiles'):
             os.makedirs(f'..{sep}Logfiles')
+
+        logs = Logging.Logging()
         try:
             data = pd.read_csv(self.file, sep="\t", header=self.header)
-            logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log',
-                                filemode='a+',
-                                format='%(asctime)s %(message)s',
-                                force=True)
-            logging.warning(f'Reading of {self.file} successful')
+            msg = (f'Reading of {self.file} successful')
+            logs.create_logs(self.__class__.__name__, msg)
 
             return data
+    
         except FileNotFoundError as e:
-            logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log',
-                                filemode='a+',
-                                format='%(asctime)s %(message)s',
-                                force=True)
-            logging.warning(f'{e}: Reading of {self.file} unsuccessful')
+            msg = f"{e}: Reading of {self.file} unsuccessful"
+            logs.create_logs(self.__class__.__name__, msg)
             sys.exit(0)
 
 
