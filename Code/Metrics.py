@@ -29,25 +29,42 @@ class Metrics:
         return r2
 
     def mean_squared_error(self):
+        """
+        Calculates the mean squared error. The mean squared error calculates the sum
+        of all predictions squared, and than divided it by the number of observations.
+        Returns a single value that represents model accuracy. The lower the mean squared
+        error, the better the model performs.
+        """
         mse = mean_squared_error(self.y_test,self.predictions)
         print(f"Model Mean Squared Error: {mse}")
         return mse
 
     def mean_absolute_error(self):
+        """
+        Calculates the mean absolute error. Rather than squaring the predictions in order
+        to get rid of the negative sign, this method simply takes the absolute value and 
+        calculates the mean. Returns a single value that represents model accuracy. The 
+        lower the mean absolute error, the better the model performs.
+        """
         mae = mean_absolute_error(self.y_test,self.predictions)
         print(f"Model Mean Absulute Error: {mae}")
         return mae
 
     
     def root_mean_squared_error(self):
+        """
+        Calculates the root mean squared error. This metric is very simillair to the mean squared error.
+        It consists of only one additional step. In order to get rid of the squaring of the data, the result
+        of the root of the mean squared error is used.
+        """
         rmse = np.sqrt(mean_squared_error(self.y_test,self.predictions))
         print(f"Model Root Mean Squared Error: {rmse}")
         return rmse
 
 
     def repeatedKfold(self, model, cv):
+        """
+        """
         scores = cross_val_score(model, self.file, self.labels, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
         return scores
-        # print('Mean MAE: %.3f (%.3f)' % (np.mean(scores), np.std(scores)))
-        # print("All scores:", scores)
