@@ -6,6 +6,10 @@ import logging
 import sys
 import os
 
+__author__ = "Rik van de Pol"
+__license__ = "MIT"
+__email__ = "rikvdpol93@gmail.com"
+__status__ = "Version 1.0"
 
 class Elasticnet:
     def __init__(self, file, labelname):

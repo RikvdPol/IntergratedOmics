@@ -1,13 +1,19 @@
 import matplotlib.pyplot as plt
 
-class Visualisations:
-    def __init__(self):
-        pass
+__author__ = "Rik van de Pol"
+__license__ = "MIT"
+__email__ = "rikvdpol93@gmail.com"
+__status__ = "Version 1.0"
 
-    def boxplot(self, data):
+class Visualisations:
+    def __init__(self, data):
+        self.data = data
+
+    def boxplot(self): 
+        labels, data = self.data.keys(), self.data.values()
+
         plt.boxplot(data)
-        plt.show()
-        # fig1, ax1 = plt.subplots()
-        # ax1.set_title('Algorithm Scores')
-        # ax1.boxplot(data)
-        # ax1.show()
+        plt.xticks(range(1, len(labels) + 1), labels)
+        # plt.show()
+        plt.savefig("../Visuals/Sampleboxplot.png")
+

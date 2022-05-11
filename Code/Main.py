@@ -1,10 +1,15 @@
 import argparse
+from copy import copy
 import Reader
 import Elasticnet
 import sys
 import Visualisations
 import Metrics
 
+__author__ = "Rik van de Pol"
+__license__ = "MIT"
+__email__ = "rikvdpol93@gmail.com"
+__status__ = "Version 1.0"
 
 def main():
     #Parse commandline arguments
@@ -27,15 +32,18 @@ def main():
     model, cv = algorithm.define_model()
     scores = algorithm.evaluate_model(model, cv)
 
-    metrics = Metrics.Metrics()
-    r2 = metrics.r_squared(y_test, predictions)
-    mse = metrics.mean_squared_error(y_test, predictions)
-    mae = metrics.mean_absolute_error(y_test, predictions)
-    rmse = metrics.root_mean_squared_error(y_test, predictions)
+    metrics = Metrics.Metrics(y_test, predictions)
+    r2 = metrics.r_squared()
+    mse = metrics.mean_squared_error()
+    mae = metrics.mean_absolute_error()
+    rmse = metrics.root_mean_squared_error()
     print("Input file: %s" % args.f)
 
-    visuals = Visualisations.Visualisations()
-    visuals.boxplot(scores)
+    scores1 = copy(scores)
+    scores2 = {"Algorithm1":scores, "Algorithm2": scores1}
+
+    visuals = Visualisations.Visualisations(scores2)
+    visuals.boxplot()
 
 if __name__ == "__main__":
     sys.exit(main())
