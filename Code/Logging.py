@@ -17,7 +17,7 @@ class Logging:
 
 
     
-    def create_logs(self, classname, msg, e=None):
+    def create_logs(self, classname, msg):
         # sep = os.path.sep
         path = Path(f"../Logfiles/{classname}.log")
         logging.basicConfig(filename=path,
