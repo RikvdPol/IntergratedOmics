@@ -21,8 +21,10 @@ def main():
     algorithm = Elasticnet.Elasticnet(data, "BMI")
     algorithm.extract_labels()
     X_train, X_test, y_train, y_test = algorithm.split_data()
-    model, cv = algorithm.define_model()
-    algorithm.evaluate_model(model, cv)
+    elastic_model = algorithm.train_model(X_train, y_train)
+    # model, cv = algorithm.define_model()
+    # elastic_model = algorithm.evaluate_model(model, cv)
+    algorithm.predict(elastic_model, X_train)
     print("Input file: %s" % args.f)
 
 
