@@ -22,6 +22,7 @@ Algorithms/*
 *.so
 
 # Distribution / packaging
+.vscode/
 Code/.idea/
 .idea/*
 .Python
