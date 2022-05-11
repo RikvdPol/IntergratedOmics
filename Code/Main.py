@@ -3,6 +3,7 @@ import Reader
 import Elasticnet
 import sys
 import Visualisations
+import Metrics
 
 
 def main():
@@ -25,8 +26,12 @@ def main():
     # model, cv = algorithm.define_model()
     # elastic_model = algorithm.evaluate_model(model, cv)
     predictions = algorithm.predict(elastic_model, X_test, y_test)
-    algorithm.r_squared(y_test, predictions)
-    algorithm.mean_squared_error(y_test, predictions)
+
+    metrics = Metrics.Metrics()
+    metrics.r_squared(y_test, predictions)
+    metrics.mean_squared_error(y_test, predictions)
+    # algorithm.r_squared(y_test, predictions)
+    # algorithm.mean_squared_error(y_test, predictions)
     print("Input file: %s" % args.f)
 
 
