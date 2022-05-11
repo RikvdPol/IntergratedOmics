@@ -14,6 +14,5 @@ class Visualisations:
 
         plt.boxplot(data)
         plt.xticks(range(1, len(labels) + 1), labels)
-        # plt.show()
         plt.savefig("../Visuals/Sampleboxplot.png")
 
