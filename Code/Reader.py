@@ -20,7 +20,9 @@ class Reader:
 
     def reader(self):
         """"
-        Read a file and print the first five rows.
+        Read the file(s) that were provided via the command line, and store in a pandas dataframe.
+        Log files are automatically created describing wether or not the file was succesfully read, with a
+        message describing the error or success.
         """
         sep = os.path.sep
         if not os.path.exists(f'..{sep}Logfiles'):
