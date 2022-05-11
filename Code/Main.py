@@ -33,6 +33,7 @@ def main():
     model, cv = algorithm.define_model()
     scores = algorithm.evaluate_model(model, cv)
 
+    #Calculate the metrics
     metrics = Metrics.Metrics(y_test, predictions)
     r2 = metrics.r_squared()
     mse = metrics.mean_squared_error()
