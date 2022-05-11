@@ -1,4 +1,6 @@
 import matplotlib.pyplot as plt
+import Logging
+# import plotly.express as px
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
@@ -16,3 +18,7 @@ class Visualisations:
         plt.xticks(range(1, len(labels) + 1), labels)
         plt.savefig("../Visuals/Sampleboxplot.png")
 
+        
+        # df = px.data.tips()
+        # fig = px.box(data)
+        # fig.show()

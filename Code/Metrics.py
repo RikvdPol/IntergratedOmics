@@ -2,6 +2,7 @@ from sklearn import metrics
 from sklearn.metrics import mean_squared_error,r2_score,mean_absolute_error
 import numpy as np
 from sklearn.model_selection import cross_val_score
+import Logging
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"

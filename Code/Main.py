@@ -5,6 +5,7 @@ import Elasticnet
 import sys
 import Visualisations
 import Metrics
+import Logging
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
