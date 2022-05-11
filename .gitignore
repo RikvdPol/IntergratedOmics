@@ -22,6 +22,7 @@ Algorithms/*
 *.so
 
 # Distribution / packaging
+Code/.idea/
 .idea/*
 .Python
 build/
