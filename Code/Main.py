@@ -14,12 +14,13 @@ def main():
     args = parser.parse_args()
 
     #Read the data provided via the commandline
-    read = Reader.Reader()
-    data = read.reader(args.f)
+    read = Reader.Reader(args.f, args.head)
+    data = read.reader()
 
     #Run elasticnet
     algorithm = Elasticnet.Elasticnet(data, "BMI")
     algorithm.extract_labels()
+    X_train, X_test, y_train, y_test = algorithm.split_data()
     model, cv = algorithm.define_model()
     algorithm.evaluate_model(model, cv)
     print("Input file: %s" % args.f)

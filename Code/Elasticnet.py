@@ -1,4 +1,4 @@
-from sklearn.model_selection import cross_val_score
+from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.model_selection import RepeatedKFold
 from sklearn.linear_model import ElasticNet
 import numpy as np
@@ -30,12 +30,17 @@ class Elasticnet:
         self.file = self.file.drop([self.labelname, "Pseudo", "Antibody_batch"], axis=1)
         # print(self.labels)
 
-    def split_data(self):
-        pass
+    def split_data(self, test_size=0.3, random_state=0):
+        X_train, X_test, y_train, y_test = train_test_split(self.file,
+                                                            self.labels,
+                                                            test_size=0.25,
+                                                            random_state=random_state)
 
-    def define_model(self, alpha=1.0, l1_ratio=0.5, n_splits=10, n_repeats=3, random_state=None):
+        return X_train, X_test, y_train, y_test
+
+    def define_model(self, alpha=1.0, l1_ratio=0.5, n_splits=10, n_repeats=3, random_state=0):
         model = ElasticNet(alpha=alpha, l1_ratio=l1_ratio)
-        cv = RepeatedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=1)
+        cv = RepeatedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=random_state)
         return model, cv
 
     def train_model(self):
