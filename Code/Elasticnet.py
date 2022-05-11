@@ -5,6 +5,7 @@ import numpy as np
 import logging
 import sys
 import os
+import Logging
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
@@ -20,21 +21,15 @@ class Elasticnet:
     def extract_labels(self):
         sep = os.path.sep
         self.file = self.file.dropna(axis=0)
+        logs = Logging.Logging()
         try:
             self.labels = self.file[self.labelname]
-
-            logging.basicConfig(filename=f'..{sep}Logfiles{sep}ElasticNet.log',
-                    filemode='a+',
-                    format='%(asctime)s %(message)s',
-                    force=True)
-            logging.warning(f'Columnname {self.labelname} used as predictor label')
+            msg = (f"Columnname {self.labelname} used as predictor label")
+            logs.create_logs(self.__class__.__name__, msg)
 
         except KeyError as e:
-            logging.basicConfig(filename=f'..{sep}Logfiles{sep}ElasticNet.log',
-                                filemode='a+',
-                                format='%(asctime)s %(message)s',
-                                force=True)
-            logging.warning(f'{e}: Labelname {self.labelname} not present in data')
+            msg = f"{e}: Labelname {self.labelname} not present in data"
+            logs.create_logs(self.__class__.__name__, msg)
             sys.exit(0)
 
         self.file = self.file.drop([self.labelname, "Pseudo", "Antibody_batch"], axis=1)
