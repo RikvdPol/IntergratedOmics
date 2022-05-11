@@ -1,5 +1,5 @@
 from sklearn import metrics
-from sklearn.metrics import mean_squared_error,r2_score
+from sklearn.metrics import mean_squared_error,r2_score,mean_absolute_error
 import numpy as np
 
 class Metrics:
@@ -21,11 +21,17 @@ class Metrics:
         print(f"Model R2: {r2}")
 
     def mean_squared_error(self, y_test, predictions):
-        mse = np.sqrt(mean_squared_error(y_test,predictions))
+        mse = mean_squared_error(y_test,predictions)
         print(f"Model Mean Squared Error: {mse}")
+        return mse
 
-    def mean_absolute_error(self):
-        pass
+    def mean_absolute_error(self, y_test, predictions):
+        mae = mean_absolute_error(y_test, predictions)
+        print(f"Model Mean Absulute Error: {mae}")
+        return mae
+
     
-    def root_mean_squared_error(self):
-        pass
+    def root_mean_squared_error(self, y_test, predictions):
+        rmse = np.sqrt(mean_squared_error(y_test, predictions))
+        print(f"Model Root Mean Squared Error: {rmse}")
+        return rmse
