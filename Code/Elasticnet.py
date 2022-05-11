@@ -1,5 +1,5 @@
-from sklearn.model_selection import train_test_split, cross_val_score
-from sklearn.model_selection import RepeatedKFold
+from sklearn.model_selection import train_test_split, cross_val_score, RepeatedKFold
+from sklearn.metrics import mean_squared_error,r2_score
 from sklearn.linear_model import ElasticNet
 import numpy as np
 import logging
@@ -33,7 +33,7 @@ class Elasticnet:
     def split_data(self, test_size=0.3, random_state=None):
         X_train, X_test, y_train, y_test = train_test_split(self.file,
                                                             self.labels,
-                                                            test_size=0.25,
+                                                            test_size=test_size,
                                                             random_state=random_state)
 
         return X_train, X_test, y_train, y_test
@@ -47,9 +47,10 @@ class Elasticnet:
         elastic_model = ElasticNet().fit(X_train, y_train)
         return elastic_model
 
-    def predict(self, elastic_model, X_train):
-        predictions = elastic_model.predict(X_train)
-        print(predictions[:10])
+    def predict(self, elastic_model, X_test, y_test):
+        predictions = elastic_model.predict(X_test)
+        mse = np.sqrt(mean_squared_error(y_test,predictions))
+        print(f"Model Mean Squared Error: {mse}")
 
     def evaluate_model(self, model, cv):
         scores = cross_val_score(model, self.file, self.labels, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)

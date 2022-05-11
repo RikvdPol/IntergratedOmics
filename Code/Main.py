@@ -24,7 +24,7 @@ def main():
     elastic_model = algorithm.train_model(X_train, y_train)
     # model, cv = algorithm.define_model()
     # elastic_model = algorithm.evaluate_model(model, cv)
-    algorithm.predict(elastic_model, X_train)
+    algorithm.predict(elastic_model, X_test, y_test)
     print("Input file: %s" % args.f)
 
 
