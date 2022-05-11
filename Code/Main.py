@@ -39,6 +39,8 @@ def main():
     rmse = metrics.root_mean_squared_error()
     print("Input file: %s" % args.f)
 
+
+    #Data preparation for plotting(should become a class)
     scores1 = copy(scores)
     scores2 = {"Algorithm1":scores, "Algorithm2": scores1}
 
