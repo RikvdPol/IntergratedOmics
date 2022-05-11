@@ -63,5 +63,7 @@ class Elasticnet:
     def evaluate_model(self, model, cv):
         scores = cross_val_score(model, self.file, self.labels, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
-        print('Mean MAE: %.3f (%.3f)' % (np.mean(scores), np.std(scores)))
+        return scores
+        # print('Mean MAE: %.3f (%.3f)' % (np.mean(scores), np.std(scores)))
+        # print("All scores:", scores)
 

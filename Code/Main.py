@@ -23,19 +23,19 @@ def main():
     algorithm.extract_labels()
     X_train, X_test, y_train, y_test = algorithm.split_data()
     elastic_model = algorithm.train_model(X_train, y_train)
-    # model, cv = algorithm.define_model()
-    # elastic_model = algorithm.evaluate_model(model, cv)
     predictions = algorithm.predict(elastic_model, X_test)
+    model, cv = algorithm.define_model()
+    scores = algorithm.evaluate_model(model, cv)
 
     metrics = Metrics.Metrics()
     r2 = metrics.r_squared(y_test, predictions)
     mse = metrics.mean_squared_error(y_test, predictions)
     mae = metrics.mean_absolute_error(y_test, predictions)
     rmse = metrics.root_mean_squared_error(y_test, predictions)
-    # algorithm.r_squared(y_test, predictions)
-    # algorithm.mean_squared_error(y_test, predictions)
     print("Input file: %s" % args.f)
 
+    visuals = Visualisations.Visualisations()
+    visuals.boxplot(scores)
 
 if __name__ == "__main__":
     sys.exit(main())

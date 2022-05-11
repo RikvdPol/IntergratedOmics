@@ -1,6 +1,8 @@
 from sklearn import metrics
 from sklearn.metrics import mean_squared_error,r2_score,mean_absolute_error
 import numpy as np
+from sklearn.model_selection import cross_val_score
+
 
 class Metrics:
     def __init__(self):
@@ -19,6 +21,7 @@ class Metrics:
         """
         r2 = r2_score(y_test,predictions)
         print(f"Model R2: {r2}")
+        return r2
 
     def mean_squared_error(self, y_test, predictions):
         mse = mean_squared_error(y_test,predictions)
@@ -35,3 +38,11 @@ class Metrics:
         rmse = np.sqrt(mean_squared_error(y_test, predictions))
         print(f"Model Root Mean Squared Error: {rmse}")
         return rmse
+
+
+    def repeatedKfold(self, model, cv):
+        scores = cross_val_score(model, self.file, self.labels, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
+        scores = np.absolute(scores)
+        return scores
+        # print('Mean MAE: %.3f (%.3f)' % (np.mean(scores), np.std(scores)))
+        # print("All scores:", scores)
