@@ -1,11 +1,12 @@
 from sklearn.model_selection import train_test_split, cross_val_score, RepeatedKFold
-from sklearn.metrics import mean_squared_error,r2_score
+from sklearn.metrics import mean_squared_error,r2_score, make_scorer
 from sklearn.linear_model import ElasticNet
 import numpy as np
 import logging
 import sys
 import os
 import Logging
+import Metrics
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
@@ -66,7 +67,8 @@ class Elasticnet:
         return predictions
 
     def evaluate_model(self, model, cv):
-        scores = cross_val_score(model, self.file, self.labels, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
+        # metric = Metrics.Metrics()
+        scores = cross_val_score(model, self.file, self.labels, scoring=make_scorer(mean_squared_error), cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
         return scores
         # print('Mean MAE: %.3f (%.3f)' % (np.mean(scores), np.std(scores)))
