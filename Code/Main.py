@@ -6,6 +6,7 @@ import sys
 import Visualisations
 import Metrics
 import Logging
+import xgboost_algorithm
 
 def main():
     # Parse commandline arguments
@@ -47,7 +48,8 @@ def main():
 
     elif args.ML_type == "XG":
         try:
-            pass
+            algorithm = xgboost_algorithm.XG(data, 'BMI')
+            algorithm.XG_boost(data, "BMI")
         except:
             print("Error: XG failed")
             sys.exit(1)
