@@ -33,6 +33,7 @@ def main():
     model, cv = algorithm.define_model()
     scores = algorithm.evaluate_model(model, cv)
 
+    # Calculate the metrics
     metrics = Metrics.Metrics(y_test, predictions)
     r2 = metrics.r_squared()
     mse = metrics.mean_squared_error()
@@ -45,7 +46,7 @@ def main():
     scores1 = copy(scores)
     scores2 = {"Algorithm1":scores, "Algorithm2": scores1}
 
-    visuals = Visualisations.Visualisations(scores2)
+    visuals = Visualisations.Visualisations(scores2, cv)
     visuals.boxplot()
 
 if __name__ == "__main__":
