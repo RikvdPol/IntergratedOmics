@@ -1,33 +1,44 @@
 import pandas as pd
 import os
-import logging
+import Logging
+import sys
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
 __email__ = "rikvdpol93@gmail.com"
-__status__ = "WIP"
+__status__ = "Version 1.0"
 
 
 class Reader:
-    """"
-    Simple reader class that reads a file.
+    """
+    Reads an input file and store the file in a pandas dataframe for later use.
     """
 
-    def __init__(self):
-        pass
+    def __init__(self, file, header):
+        self.file = file
+        self.header = header
 
-    def reader(self, file):
+    def reader(self):
         """"
-        Read a file and print the first five rows.
+        Read the file(s) that were provided via the command line, and store in a pandas dataframe.
+        Log files are automatically created describing wether or not the file was succesfully read, with a
+        message describing the error or success.
         """
         sep = os.path.sep
+        if not os.path.exists(f'..{sep}Logfiles'):
+            os.makedirs(f'..{sep}Logfiles')
+
+        logs = Logging.Logging()
         try:
-            data = pd.read_csv(file, sep="\t")
-            logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log', filemode='a+',
-                                format='%(asctime)s %(message)s')
-            logging.warning(f'Reading of {file} successful')
+            data = pd.read_csv(self.file, sep="\t", header=self.header)
+            msg = (f'Reading of {self.file} successful')
+            logs.create_logs(self.__class__.__name__, msg)
+
             return data
+    
         except FileNotFoundError as e:
-            logging.basicConfig(filename=f'..{sep}Logfiles{sep}reader.log', filemode='a+',
-                                format='%(asctime)s %(message)s')
-            logging.warning(f'{e}: Reading of {file} unsuccessful')
+            msg = f"{e}: Reading of {self.file} unsuccessful"
+            logs.create_logs(self.__class__.__name__, msg)
+            sys.exit(0)
+
+

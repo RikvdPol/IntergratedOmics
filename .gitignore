@@ -6,6 +6,9 @@ __pycache__/
 #Datafolder
 Data/*
 
+#Visuals
+Visuals/
+
 #Results
 Results/*
 
@@ -19,6 +22,8 @@ Algorithms/*
 *.so
 
 # Distribution / packaging
+.vscode/
+Code/.idea/
 .idea/*
 .Python
 build/
@@ -39,6 +44,7 @@ share/python-wheels/
 .installed.cfg
 *.egg
 MANIFEST
+Code/.vscode
 
 # PyInstaller
 #  Usually these files are written by a python script from a template
