@@ -19,6 +19,9 @@ def main():
     read = Reader.Reader(args.f, args.head)
     data = read.reader()
 
+#TODO upper en lower inputs
+#TODO let user define which labels are of interest
+
     if args.ML_type == "Elasticnet":
         try:
             algorithm = Elasticnet.Elasticnet(data, 'BMI')
