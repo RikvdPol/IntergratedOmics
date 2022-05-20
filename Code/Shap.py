@@ -3,7 +3,7 @@ import matplotlib.pyplot as plt
 
 class Shap():
     def __init__(self, model, X_train, feature_names):  
-        "Initializes class for providing Shap values based on
+        "Initializes class for providing Shap values based on"
         "prior conducted XGboost algorithm"
         try: 
             self.model = model   # XGboost trained model
@@ -36,7 +36,7 @@ class Shap():
                   
                  
     def Local(self):
-        "Provides global results of Shapley values. Input of the local
+        "Provides global results of Shapley values. Input of the local"
         "observation is requested as argument. "
         try:
             observation = str(input("Please provide the desired observation value on which the local Shapley values should be based on"))
@@ -53,7 +53,7 @@ class Shap():
         except Exception as e:
             print(e)
         else:
-            print("Local feature contribution is succesfully produced. This plot depicts the importance of each feature that affects the single observation of on your input. 
+            print("Local feature contribution is succesfully produced. This plot depicts the importance of each feature that affects the single observation of on your input.")
                   
  
 # Commence Shap values program
@@ -64,10 +64,10 @@ display(Shap.Global())   # Provides initial global overview of Shap values
 try:
     local_decision = str(input("Would you like to obtain the feature contributions on a single observation?\nType y for Yes\nType n for No\n"))              
 except:
-    print("Please type only the letter \"y\" for Yes or \"n\" for no.") 
+    print("Please type only the letter \'y\' for Yes or \'n\' for no.") 
     
 if local_decision == "y":
-   display( Shap.Local() )
+   display(Shap.Local())
 if local_decision == "n":
     print("You have reached the end of this program")
 
