@@ -3,9 +3,10 @@ from copy import copy
 import Reader
 import Elasticnet
 import sys
-import Visualisations
+import Visualisationsiz
 import Metrics
 import Logging
+import xgboost_algorithm
 
 def main():
     # Parse commandline arguments
@@ -24,12 +25,18 @@ def main():
 
     if args.ML_type == "Elasticnet":
         try:
-            algorithm = Elasticnet.Elasticnet(data, 'BMI')
+
+        except:
+            print("Error: Elasticnet failed")
+            sys.exit(1)
+
+    elif args.ML_type == "XG":
+        try:
+            algorithm = xgboost_algorithm.XG(data, 'BMI')
             algorithm.extract_labels()
             X_train, X_test, y_train, y_test = algorithm.split_data()
-            elastic_model = algorithm.train_model(X_train, y_train)
-            predictions = algorithm.predict(elastic_model, X_test)
             model, cv = algorithm.define_model()
+            predictions = algorithm.predict(elastic_model, X_test)
             scores = algorithm.evaluate_model(model, cv)
             metrics = Metrics.Metrics(y_test, predictions)
             r2 = metrics.r_squared()
@@ -44,13 +51,7 @@ def main():
             #
             visuals = Visualisations.Visualisations(scores2, cv)
             visuals.boxplot()
-        except:
-            print("Error: Elasticnet failed")
-            sys.exit(1)
-
-    elif args.ML_type == "XG":
-        try:
-            pass
+            
         except:
             print("Error: XG failed")
             sys.exit(1)
