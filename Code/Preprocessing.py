@@ -55,5 +55,3 @@ print("Loading the data... Please wait.")
 df = pd.read_csv('Covariates.csv', index_col=0, sep="\t")   # Example file is used
 target, features = Preprocessing(df).sort_dataset()   # target and features are extracted from dataset
 
-
-#MetaPhlan3 
