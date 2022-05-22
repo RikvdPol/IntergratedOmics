@@ -8,6 +8,7 @@ import Metrics
 import Logging
 import xgboost_algorithm
 import Preprocessing
+import Recommendation
 
 def main():
     # Parse commandline arguments
