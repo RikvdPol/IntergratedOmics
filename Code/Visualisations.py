@@ -32,4 +32,4 @@ class Visualisations:
         plt.boxplot(data)
         plt.ylabel(self.metric)
         plt.xticks(range(1, len(labels) + 1), labels)
-        plt.savefig("../Visuals/Sampleboxplot.png")
+        plt.savefig("Visuals/Sampleboxplot.png")

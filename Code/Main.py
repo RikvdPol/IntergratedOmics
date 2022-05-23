@@ -3,12 +3,12 @@ from copy import copy
 import Reader
 import Elasticnet
 import sys
-import Visualisationsiz
+import Visualisations
 import Metrics
 import Logging
 import xgboost_algorithm
-import Preprocessing
-import Recommendation
+# import Preprocessing
+# import Recommendation
 
 def main():
     # Parse commandline arguments
@@ -22,54 +22,65 @@ def main():
     read = Reader.Reader(args.f, args.head)
     data = read.reader()
 
-#TODO upper en lower inputs
-#TODO let user define which labels are of interest
 
-    if args.ML_type == "Elasticnet":
-        try:
+# TODO upper en lower inputs
+# TODO let user define which labels are of interest
 
-        except:
-            print("Error: Elasticnet failed")
-            sys.exit(1)
 
-    elif args.ML_type == "XG":
-        try:
-            algorithm = xgboost_algorithm.XG(data, 'BMI')
-            algorithm.extract_labels()
-            X_train, X_test, y_train, y_test = algorithm.split_data()
-            model, cv = algorithm.define_model()
-            predictions = algorithm.predict(elastic_model, X_test)
-            scores = algorithm.evaluate_model(model, cv)
-            metrics = Metrics.Metrics(y_test, predictions)
-            r2 = metrics.r_squared()
-            mse = metrics.mean_squared_error()
-            mae = metrics.mean_absolute_error()
-            rmse = metrics.root_mean_squared_error()
-            print("Input file: %s" % args.f)
-
+    # if args.ML_type == "Elasticnet":
+    #     try:
+    algorithm = Elasticnet.Elasticnet(data, 'BMI')
+    algorithm.extract_labels()
+    X_train, X_test, y_train, y_test = algorithm.split_data()
+    elastic_model = algorithm.train_model(X_train, y_train)
+    predictions = algorithm.predict(elastic_model, X_test)
+    model, cv = algorithm.define_model()
+    scores = algorithm.evaluate_model(model, cv)
+    metrics = Metrics.Metrics(y_test, predictions)
+    r2 = metrics.r_squared()
+    mse = metrics.mean_squared_error()
+    mae = metrics.mean_absolute_error()
+    rmse = metrics.root_mean_squared_error()
+    print("Input file: %s" % args.f)
+            
             # Data preparation for plotting(should become a class)
-            scores1 = copy(scores)
-            scores2 = {"Algorithm1": scores, "Algorithm2": scores1}
-            #
-            visuals = Visualisations.Visualisations(scores2, cv)
-            visuals.boxplot()
-        except:
-            print("Error: Elasticnet failed")
-            sys.exit(1)
+            # scores1 = copy(scores)
+            # scores2 = {"Algorithm1": scores, "Algorithm2": scores1}
+            # visuals = Visualisations.Visualisations(scores2, cv)
+            # visuals.boxplot()
+        # except:
+        #     print("Error: Elasticnet failed")
+        #     sys.exit(1)
 
-    elif args.ML_type == "XG":
-        try:
-            algorithm = xgboost_algorithm.XG(data, 'BMI')
-            algorithm.XG_boost(data, "BMI")
-
-        except:
-            print("Error: XG failed")
-            sys.exit(1)
+    # elif args.ML_type == "XG":
+        # try:
+    algorithm = xgboost_algorithm.XG(data, 'BMI')
+    algorithm.extract_labels()
+    X_train, X_test, y_train, y_test = algorithm.split_data()
+    elastic_model = algorithm.train_model(X_train, y_train)
+    predictions = algorithm.predict(elastic_model, X_test)
+    model, cv = algorithm.define_model()
+    scores1 = algorithm.evaluate_model(model, cv)
+    metrics = Metrics.Metrics(y_test, predictions)
+    r2 = metrics.r_squared()
+    mse = metrics.mean_squared_error()
+    mae = metrics.mean_absolute_error()
+    rmse = metrics.root_mean_squared_error()
+    print("Input file: %s" % args.f)
+        
+        # Data preparation for plotting(should become a class)
+    scores2 = {"elasticnet": scores, "XG": scores1}
+    visuals = Visualisations.Visualisations(scores2, cv)
+    visuals.boxplot()
+            
+        # except:
+        #     print("Error: XG failed")
+        #     sys.exit(1)
 
         # algorithm = xgboost_algorithm.XG(data, 'BMI')
         # algorithm.XG_boost(data, 'BMI')
 
-    elif args.ML_type == "etcetera":
+    if args.ML_type == "etcetera":
         print("etcetera")
 
     else:

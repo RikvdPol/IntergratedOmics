@@ -2,11 +2,9 @@ from sklearn.model_selection import train_test_split, cross_val_score, RepeatedK
 from sklearn.metrics import mean_squared_error,r2_score, make_scorer
 from sklearn.linear_model import ElasticNet
 import numpy as np
-import logging
 import sys
 import os
 import Logging
-import Metrics
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
