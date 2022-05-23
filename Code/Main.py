@@ -53,7 +53,15 @@ def main():
             #
             visuals = Visualisations.Visualisations(scores2, cv)
             visuals.boxplot()
-            
+        except:
+            print("Error: Elasticnet failed")
+            sys.exit(1)
+
+    elif args.ML_type == "XG":
+        try:
+            algorithm = xgboost_algorithm.XG(data, 'BMI')
+            algorithm.XG_boost(data, "BMI")
+
         except:
             print("Error: XG failed")
             sys.exit(1)
