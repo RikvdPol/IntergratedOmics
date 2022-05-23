@@ -27,8 +27,6 @@ def main():
 # TODO let user define which labels are of interest
 
 
-    # if args.ML_type == "Elasticnet":
-    #     try:
     algorithm = Elasticnet.Elasticnet(data, 'BMI')
     algorithm.extract_labels()
     X_train, X_test, y_train, y_test = algorithm.split_data()
@@ -43,17 +41,6 @@ def main():
     rmse = metrics.root_mean_squared_error()
     print("Input file: %s" % args.f)
             
-            # Data preparation for plotting(should become a class)
-            # scores1 = copy(scores)
-            # scores2 = {"Algorithm1": scores, "Algorithm2": scores1}
-            # visuals = Visualisations.Visualisations(scores2, cv)
-            # visuals.boxplot()
-        # except:
-        #     print("Error: Elasticnet failed")
-        #     sys.exit(1)
-
-    # elif args.ML_type == "XG":
-        # try:
     algorithm = xgboost_algorithm.XG(data, 'BMI')
     algorithm.extract_labels()
     X_train, X_test, y_train, y_test = algorithm.split_data()
@@ -68,25 +55,9 @@ def main():
     rmse = metrics.root_mean_squared_error()
     print("Input file: %s" % args.f)
         
-        # Data preparation for plotting(should become a class)
     scores2 = {"elasticnet": scores, "XG": scores1}
     visuals = Visualisations.Visualisations(scores2, cv)
     visuals.boxplot()
             
-        # except:
-        #     print("Error: XG failed")
-        #     sys.exit(1)
-
-        # algorithm = xgboost_algorithm.XG(data, 'BMI')
-        # algorithm.XG_boost(data, 'BMI')
-
-    if args.ML_type == "etcetera":
-        print("etcetera")
-
-    else:
-        print("Please specify a valid ML type")  # raise exception?
-        sys.exit()
-
-
 if __name__ == "__main__":
     sys.exit(main())
