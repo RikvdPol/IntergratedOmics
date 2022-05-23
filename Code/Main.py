@@ -3,10 +3,12 @@ from copy import copy
 import Reader
 import Elasticnet
 import sys
-import Visualisations
+import Visualisationsiz
 import Metrics
 import Logging
 import xgboost_algorithm
+import Preprocessing
+import Recommendation
 
 def main():
     # Parse commandline arguments
@@ -20,14 +22,23 @@ def main():
     read = Reader.Reader(args.f, args.head)
     data = read.reader()
 
+#TODO upper en lower inputs
+#TODO let user define which labels are of interest
+
     if args.ML_type == "Elasticnet":
         try:
-            algorithm = Elasticnet.Elasticnet(data, 'BMI')
+
+        except:
+            print("Error: Elasticnet failed")
+            sys.exit(1)
+
+    elif args.ML_type == "XG":
+        try:
+            algorithm = xgboost_algorithm.XG(data, 'BMI')
             algorithm.extract_labels()
             X_train, X_test, y_train, y_test = algorithm.split_data()
-            elastic_model = algorithm.train_model(X_train, y_train)
-            predictions = algorithm.predict(elastic_model, X_test)
             model, cv = algorithm.define_model()
+            predictions = algorithm.predict(elastic_model, X_test)
             scores = algorithm.evaluate_model(model, cv)
             metrics = Metrics.Metrics(y_test, predictions)
             r2 = metrics.r_squared()
@@ -50,6 +61,7 @@ def main():
         try:
             algorithm = xgboost_algorithm.XG(data, 'BMI')
             algorithm.XG_boost(data, "BMI")
+
         except:
             print("Error: XG failed")
             sys.exit(1)
