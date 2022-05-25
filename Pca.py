@@ -21,20 +21,17 @@ x = StandardScaler().fit_transform(x)
 pd.DataFrame(data = x, columns = features).head()
 
 #PCA Projection to 2D
-def pca(x, n_components=2)
-    x = StandardScaler().fit_transform(x)
+def pca(x, n_components=2):
     pca = PCA(n_components)
     principalComponents = pca.fit_transform(x)
     principalDf = pd.DataFrame(data = principalComponents
                 , columns = ['principal component 1', 'principal component 2'])
     return principalDf
 
-principalDf.head(5)
+principalDf = pca(x, n_components=2)
 
-df[['target']].head()
 
 finalDf = pd.concat([principalDf, df[['target']]], axis = 1)
-finalDf.head(5)
 
 
 #Visualize 2D Projection
@@ -63,7 +60,6 @@ ax.grid()
 #The explained variance tells us how much information (variance) can be attributed to each of the principal components.
 
 pca.explained_variance_ratio_
-array([ 0.72770452,  0.23030523])
 
 '''
 Together, the first two principal components contain 95.80% of the information. The first principal component contains 72.77% of the variance and the second principal component contains 23.03% of the variance. The third and fourth principal component contained the rest of the variance of the dataset.
@@ -79,3 +75,4 @@ The directions with largest variance are assumed to be of the most interest
 Only considers orthogonal transformations (rotations) of the original variables
 PCA is only based on the mean vector and covariance matrix. Some distributions (multivariate normal) are characterized by this, but some are not.
 If the variables are correlated, PCA can achieve dimension reduction. If not, PCA just orders them according to their variances.
+'''
