@@ -25,15 +25,14 @@ class Reader:
         message describing the error or success.
         """
         sep = os.path.sep
-        if not os.path.exists(f'..{sep}Logfiles'):
-            os.makedirs(f'..{sep}Logfiles')
+        if not os.path.exists(f'Logfiles'):
+            os.makedirs(f'Logfiles')
 
         logs = Logging.Logging()
         try:
             data = pd.read_csv(self.file, sep="\t", header=self.header)
             msg = (f'Reading of {self.file} successful')
             logs.create_logs(self.__class__.__name__, msg)
-
             return data
     
         except FileNotFoundError as e:
