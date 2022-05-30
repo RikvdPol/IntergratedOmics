@@ -11,6 +11,7 @@ import xgboost_algorithm
 # import Recommendation
 
 models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG}
+scores_dict = {}
 
 def main():
     # Parse commandline arguments
@@ -33,30 +34,18 @@ def main():
         predictions = algorithm.predict(elastic_model, X_test)
         model, cv = algorithm.define_model()
         scores = algorithm.evaluate_model(model, cv)
+        
         metrics = Metrics.Metrics(y_test, predictions)
         r2 = metrics.r_squared()
         mse = metrics.mean_squared_error()
         mae = metrics.mean_absolute_error()
         rmse = metrics.root_mean_squared_error()
         print("Input file: %s" % args.f)
-            
-    algorithm = xgboost_algorithm.XG(data, 'BMI')
-    algorithm.extract_labels()
-    X_train, X_test, y_train, y_test = algorithm.split_data()
-    elastic_model = algorithm.train_model(X_train, y_train)
-    predictions = algorithm.predict(elastic_model, X_test)
-    model, cv = algorithm.define_model()
-    scores1 = algorithm.evaluate_model(model, cv)
-    metrics = Metrics.Metrics(y_test, predictions)
-    r2 = metrics.r_squared()
-    mse = metrics.mean_squared_error()
-    mae = metrics.mean_absolute_error()
-    rmse = metrics.root_mean_squared_error()
-    print("Input file: %s" % args.f)
         
-    scores2 = {"elasticnet": scores, "XG": scores1}
-    visuals = Visualisations.Visualisations(scores2, cv)
-    visuals.boxplot()
+        scores_dict[model] = scores
+
+visuals = Visualisations.Visualisations(scores_dict, cv)
+visuals.boxplot()
             
 if __name__ == "__main__":
     sys.exit(main())
