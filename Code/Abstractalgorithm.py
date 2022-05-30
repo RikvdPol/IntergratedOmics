@@ -45,8 +45,8 @@ class Abstractalgorithm:
 
         return X_train, X_test, y_train, y_test
 
-    def predict(self, elastic_model, X_test):
-        predictions = elastic_model.predict(X_test)
+    def predict(self, model, X_test):
+        predictions = model.predict(X_test)
         return predictions
 
     def evaluate_model(self, model, cv):
