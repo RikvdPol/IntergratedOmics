@@ -36,10 +36,7 @@ def main():
         scores = algorithm.evaluate_model(model, cv)
         
         metrics = Metrics.Metrics(y_test, predictions)
-        r2 = metrics.r_squared()
-        mse = metrics.mean_squared_error()
-        mae = metrics.mean_absolute_error()
-        rmse = metrics.root_mean_squared_error()
+        r2, mse, mae, rmse = metrics.get_scores()
         print("Input file: %s" % args.f)
         
         scores_dict[model] = scores

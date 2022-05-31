@@ -69,3 +69,10 @@ class Metrics:
         scores = cross_val_score(model, self.file, self.labels, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
         return scores
+
+    def get_scores(self):
+        r2 = r_squared()
+        mse = mean_squared_error()
+        mae = mean_absolute_error()
+        rmse = root_mean_squared_error()
+        return r2, mse, mae, rmse
