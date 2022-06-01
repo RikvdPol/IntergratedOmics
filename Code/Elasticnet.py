@@ -17,4 +17,3 @@ class Elasticnet(Abstractalgorithm):
     def train_model(self, X_train, y_train):
         elastic_model = ElasticNet().fit(X_train, y_train)
         return elastic_model
-
