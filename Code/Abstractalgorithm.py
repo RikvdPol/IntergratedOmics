@@ -1,9 +1,10 @@
 from sklearn.model_selection import train_test_split, cross_val_score, RepeatedKFold
-from sklearn.metrics import mean_squared_error,r2_score, make_scorer
+from sklearn.metrics import mean_squared_error, r2_score, make_scorer, mean_absolute_error
 import numpy as np
 import sys
 import os
 import Logging
+
 
 class Abstractalgorithm:
     def __init__(self, file, labelname):
@@ -51,7 +52,14 @@ class Abstractalgorithm:
 
     def evaluate_model(self, model, cv):
         # metric = Metrics.Metrics()
-        scores = cross_val_score(model, self.file, self.labels, scoring=make_scorer(mean_squared_error), cv=cv, n_jobs=-1)
+        scores = cross_val_score(model, self.file, self.labels, scoring=make_scorer(mean_absolute_error), cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
         return scores
+
+    def define_model(self, alpha=1.0, n_splits=10, n_repeats=3, random_state=None):
+        pass
+
+    def train_model(self, model, X_train, y_train):
+        pass
+
         

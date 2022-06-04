@@ -12,7 +12,7 @@ class XG(Abstractalgorithm):
         model = XGBRegressor()
         return model, cv
 
-    def train_model(self, X_train, y_train):
-        elastic_model = XGBRegressor().fit(X_train, y_train)
+    def train_model(self, clf, X_train, y_train):
+        elastic_model = clf.fit(X_train, y_train)
         return elastic_model
 

@@ -1,5 +1,4 @@
 import logging
-import os
 from pathlib import Path
 
 
@@ -11,15 +10,10 @@ __status__ = "Version 1.0"
 
 class Logging:
     def __int__(self):
-        # self.sep = os.path.sep
-        # self.sep = "/"
         pass
 
-
-    
     def create_logs(self, classname, msg):
-        # sep = os.path.sep
-        path = Path(f"Logfiles/{classname}.log")
+        path = Path(f"../Logfiles/{classname}.log")
         logging.basicConfig(filename=path,
                                 filemode='a+',
                                 format='%(asctime)s %(message)s',
