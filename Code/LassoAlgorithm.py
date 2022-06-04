@@ -14,6 +14,3 @@ class LassoAlgorithm(Abstractalgorithm):
         cv = RepeatedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=random_state)
         return model, cv
 
-    def train_model(self, clf, X_train, y_train):
-        model = clf.fit(X_train, y_train)
-        return model

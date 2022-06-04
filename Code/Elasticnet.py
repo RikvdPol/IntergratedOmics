@@ -15,10 +15,6 @@ class Elasticnet(Abstractalgorithm):
         cv = RepeatedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=random_state)
         return cv
 
-    def train_model(self, clf, X_train, y_train):
-        model = clf.fit(X_train, y_train)
-        return model
-
     def tune_hyperparameters(self):
         params = {"alpha": np.arange(0.1, 1.1, 0.1),
                   "l1_ratio": np.arange(0.1, 1.1, 0.1),

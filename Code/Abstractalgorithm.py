@@ -1,10 +1,14 @@
-from sklearn.model_selection import train_test_split, cross_val_score, RepeatedKFold
-from sklearn.metrics import mean_squared_error, r2_score, make_scorer, mean_absolute_error
+from sklearn.model_selection import train_test_split, cross_val_score
+from sklearn.metrics import make_scorer, mean_absolute_error
 import numpy as np
 import sys
 import os
 import Logging
 
+__author__ = "Rik van de Pol"
+__license__ = "MIT"
+__email__ = "rikvdpol93@gmail.com"
+__status__ = "Version 1.0"
 
 class Abstractalgorithm:
     def __init__(self, file, labelname):
@@ -59,7 +63,9 @@ class Abstractalgorithm:
     def define_model(self, alpha=1.0, n_splits=10, n_repeats=3, random_state=None):
         pass
 
-    def train_model(self, model, X_train, y_train):
-        pass
+    def train_model(self, clf, X_train, y_train):
+        model = clf.fit(X_train, y_train)
+        return model
+
 
         

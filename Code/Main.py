@@ -32,7 +32,6 @@ def main():
     clf = algorithm.tune_hyperparameters()
     clf_model = algorithm.train_model(clf, X_train, y_train)
     predictions = algorithm.predict(clf_model, X_test)
-    print(predictions - y_test)
     cv = algorithm.define_model()
     scores = algorithm.evaluate_model(clf_model, cv)
     metrics = Metrics.Metrics(y_test, predictions)
