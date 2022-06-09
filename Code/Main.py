@@ -7,11 +7,12 @@ import Visualisations
 import Metrics
 import Logging
 import xgboost_algorithm
+import Gradient_boosting
 import Preprocessing
 import pandas as pd
 # import Recommendation
 
-models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG}
+models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG, 'gradientboost': Gradient_boosting.Gradientboost}
 scores_dict = {}
 
 df_ID = pd.read_csv('Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
