@@ -1,4 +1,5 @@
 import argparse
+from copy import copy
 import Reader
 import Elasticnet
 import sys
@@ -6,76 +7,49 @@ import Visualisations
 import Metrics
 import Logging
 import xgboost_algorithm
-import LassoAlgorithm
-# import Preprocessing
+import Gradient_boosting
+import Preprocessing
+import pandas as pd
 # import Recommendation
 
+models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG, 'gradientboost': Gradient_boosting.Gradientboost}
+scores_dict = {}
+
+df_ID = pd.read_csv('Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
+df_micro = pd.read_csv('Data/MetaPhlan3.csv', index_col=0, sep="\t") 
+df_test = pd.concat([df_ID, df_micro], axis=1)
+df_test.drop("X1172", axis=1, inplace=True)
+df_test.dropna(inplace=True)
 
 def main():
     # Parse commandline arguments
     parser = argparse.ArgumentParser()
     parser.add_argument("-f", help="File to be read", type=str, required=True)
-    parser.add_argument("-head", help="Confirm if a header exists in the file", type=int, required=True)
     args = parser.parse_args()
-
+    
     # Read the data provided via the commandline
-    read = Reader.Reader(args.f, args.head)
+    read = Reader.Reader(args.f, 0)
     data = read.reader()
+    end_data, target, features, df_bins = Preprocessing.script_preprocessing(df_test)
 
+    for model in models_dict:
+        print(models_dict[model])
+        algorithm = models_dict[model](end_data, target)
+        X_train, X_test, y_train, y_test = algorithm.split_data()
+        algorithm.extract_labels()
+        elastic_model = algorithm.train_model(X_train, y_train)
+        predictions = algorithm.predict(elastic_model, X_test)
+        model, cv = algorithm.define_model()
+        scores = algorithm.evaluate_model(model, cv)
+        
+        metrics = Metrics.Metrics(y_test, predictions)
+        r2, mse, mae, rmse = metrics.get_scores()
+        print("Input file: %s" % args.f)
+        
+        scores_dict[model] = scores
 
-# TODO upper en lower inputs
-# TODO let user define which labels are of interest
-
-    algorithm = Elasticnet.Elasticnet(data, 'BMI')
-    algorithm.extract_labels()
-    X_train, X_test, y_train, y_test = algorithm.split_data()
-    clf = algorithm.tune_hyperparameters()
-    clf_model = algorithm.train_model(clf, X_train, y_train)
-    predictions = algorithm.predict(clf_model, X_test)
-    cv = algorithm.define_model()
-    scores = algorithm.evaluate_model(clf_model, cv)
-    metrics = Metrics.Metrics(y_test, predictions)
-    r2 = metrics.r_squared()
-    mse = metrics.mean_squared_error()
-    mae = metrics.mean_absolute_error()
-    rmse = metrics.root_mean_squared_error()
-    print(scores)
-    print("Input file: %s" % args.f)
+    visuals = Visualisations.Visualisations(scores_dict, cv)
+    visuals.boxplot()
             
-    # algorithm = xgboost_algorithm.XG(data, 'BMI')
-    # algorithm.extract_labels()
-    # X_train, X_test, y_train, y_test = algorithm.split_data()
-    # elastic_model = algorithm.train_model(X_train, y_train)
-    # predictions = algorithm.predict(elastic_model, X_test)
-    # model, cv = algorithm.define_model()
-    # scores1 = algorithm.evaluate_model(model, cv)
-    # metrics = Metrics.Metrics(y_test, predictions)
-    # r2 = metrics.r_squared()
-    # mse = metrics.mean_squared_error()
-    # mae = metrics.mean_absolute_error()
-    # rmse = metrics.root_mean_squared_error()
-    # print("Input file: %s" % args.f)
-    #
-    # algorithm = LassoAlgorithm.LassoAlgorithm(data, 'BMI')
-    # algorithm.extract_labels()
-    # X_train, X_test, y_train, y_test = algorithm.split_data()
-    # elastic_model = algorithm.train_model(X_train, y_train)
-    # predictions = algorithm.predict(elastic_model, X_test)
-    # model, cv = algorithm.define_model()
-    # scores2 = algorithm.evaluate_model(model, cv)
-    # metrics = Metrics.Metrics(y_test, predictions)
-    # r2 = metrics.r_squared()
-    # mse = metrics.mean_squared_error()
-    # mae = metrics.mean_absolute_error()
-    # rmse = metrics.root_mean_squared_error()
-    # print("Trained Lasso")
-    # print("Input file: %s" % args.f)
-    #
-    # scores2 = {"elasticnet": scores, "XG": scores1, "Lasso": scores2}
-    # visuals = Visualisations.Visualisations(scores2, cv)
-    # visuals.boxplot()
-
-
 if __name__ == "__main__":
     sys.exit(main())
-
