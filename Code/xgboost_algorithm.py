@@ -1,5 +1,3 @@
-
-# First XGBoost model for Pima Indians dataset
 from xgboost import XGBRegressor
 from sklearn.model_selection import RepeatedKFold
 from Abstractalgorithm import Abstractalgorithm
@@ -12,7 +10,4 @@ class XG(Abstractalgorithm):
         model = XGBRegressor()
         return model, cv
 
-    def train_model(self, X_train, y_train):
-        elastic_model = XGBRegressor().fit(X_train, y_train)
-        return elastic_model
 
