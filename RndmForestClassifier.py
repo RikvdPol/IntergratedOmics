@@ -1,5 +1,5 @@
 
-   
+import sklearn   
 import argparse
 from copy import copy
 import Reader
@@ -9,7 +9,8 @@ import Visualisations
 import Metrics
 import Logging
 import xgboost_algorithm
-from sklearn.ensemble import RandomForestRegressor
+from sklearn.ensemble import RandomForestClassifier
+
 # import Preprocessing
 # import Recommendation
 
@@ -30,7 +31,7 @@ def main():
     X_train, X_test, y_train, y_test = rf.split_data()
 
     
-    rf = RandomForestRegressor(n_estimators = 1000, random_state = 42)
+    rf = RandomForestClassifier(n_estimators = 1000, random_state = 42)
     rf.fit(X_train, y_train)
     predictions = rf.predict(X_test)
 
