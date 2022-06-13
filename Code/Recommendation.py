@@ -49,12 +49,16 @@ class StatsCalc():
 class Recommondation(StatsCalc):
     def __init__(self, 
                  dataset,
+                 features,
                  outliers_df, 
                  overview_df, 
                  total_outlier, 
                  total_missing,
-                 total_datapoints,total_features):
-        super().__init__(dataset, features)
+                 total_datapoints,
+                 total_features):
+       # super().__init__(dataset, features)
+        self.dataset = dataset
+        self.features = features
         self.outliers_df = outliers_df
         self.overview_df  =  overview_df
         self.total_outlier = total_outlier
@@ -69,11 +73,10 @@ class Recommondation(StatsCalc):
         "dataset detais"
         print("Calculating statistical values of your dataset... Please wait.\n")
         print("In the table below a statistical overview of your dataset is provided")
-        display(outliers_df)
-        display(overview_df)
+        display(self.outliers_df)
+        display(self.overview_df)
         ### Results of the recommondations will be updated in the properties down below and provided to following modules
         PCA_advice = []
-  
         print("###### Recommondation for possible further preprocessing before feeding dataset into XGBoost:\n")
         
         # Missing values
@@ -103,11 +106,11 @@ class Recommondation(StatsCalc):
         print("You could opt for either a so-called Principal Component Anaysis algorithm\n, or a Regularization method called Elastic Net in the following steps if this is the case with your dataset.")
         print("# Recommondation")
         if self.total_features > 50:
-            print("Your dataset contains relatively a large amount of predictors. A PCA or regularization is adviced.")
-            PCA_advice.append("y")
+            print("Your dataset contains relatively a large amount of predictors. A PCA preprocessing is adviced.")
+            PCA_advice = ["p"]
         if self.total_features < 50:
             print("Your dataset contains relatively a small amount of predictors. A PCA or regularization is not adviced.")
-            PCA_advice.append("n")
+            
             
         return PCA_advice
         
@@ -118,7 +121,7 @@ class Recommondation(StatsCalc):
             check_recommondation = input("\n#### Would you like to proceed with recommondations of this program?\nType y for Yes\nType n for No and to specify your own options\nYour input:").lower()
             try:
                 if check_recommondation == "y":
-                    PCA_advice = PCA_advice   ## I coded it like this so that if there is an error we could know where the error is derived from
+#                     PCA_advice = PCA_advice   ## I coded it like this so that if there is an error we could know where the error is derived from
                     print("Data processing will proceed according to the recommondation.")
                     return PCA_advice
 
@@ -132,23 +135,23 @@ class Recommondation(StatsCalc):
                         check_user_req = re.sub(r"\s", "", check_user_req)   # Use regex to remove all whitespaces 
                         if check_user_req == "p":
                             print("PCA data processing will be performd")
-                            PCA_advice.append(check_user_req)
+                            PCA_advice = [check_user_req]
                             return PCA_advice
                         if check_user_req == "r":
                             print("Regularization data processing will be performd")
-                            PCA_advice.append(check_user_req)
+                            PCA_advice = [check_user_req]
                             return PCA_advice
                         if check_user_req == "c":
                             print("Dataset will be feeded into XGboost without further data processing")
-                            PCA_advice.append(check_user_req)
+                            PCA_advice = [check_user_req]
                             return PCA_advice
                         if check_user_req == "r,p":
                             print("First regularization followed by PCA.")
-                            PCA_advice.append(check_user_req)
+                            PCA_advice = [check_user_req]
                             return PCA_advice
                         if check_user_req == "p,r":
                             print("First PCA will be performed followed by regularization.")
-                            PCA_advice.append(check_user_req)
+                            PCA_advice = [check_user_req]
                             return PCA_advice
                         else:
                             print("### Error")
@@ -164,10 +167,13 @@ class Recommondation(StatsCalc):
                 print("\n#### Error ####")
                 print("Only type the indicated symbol as input")
                 continue
-    
+                
+def script_recommendation(df, features):
+    stat_result = StatsCalc(df, features)    # Retrieve dataset and extracted features from preprocessing.py
+    outliers_df, overview_df, total_outlier, total_missing,total_datapoints, total_features = stat_result.return_stats()   # Retrieve stats info and display user the information
+    test2 = Recommondation(df,features, outliers_df, overview_df, total_outlier, total_missing, total_datapoints, total_features)   
+    advice = test2.provide_overview()  # Provide the user an overview of the dataset including the recommendations
+    end_result = test2.request_user_rec(advice) # Propose recommendation based on input and request options from user 
+    return end_result
 
-stat_result = StatsCalc(df, features)    # Retrieve dataset and extracted features from preprocessing.py
-outliers_df, overview_df, total_outlier, total_missing,total_datapoints, total_features = stat_result.return_stats()   # Retrieve stats info and display user the information
-test2 = Recommondation(df, outliers_df, overview_df, total_outlier, total_missing, total_datapoints, total_features)   
-advice = test2.provide_overview()  # Provide the user an overview of the dataset including the recommendations
-end_result = test2.request_user_rec(advice) # Propose recommendation based on input and request options from user 
+

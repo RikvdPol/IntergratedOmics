@@ -63,6 +63,9 @@ class Preprocessing():
                         
     def drop_column(self):
         "Requests the user whether it wants to drop a column"
+        end = self.dataset
+        target = end.iloc[:, 0]    # Splits the dataset into the target column
+        features = end.iloc[: , 1:]
         while True:
             print("\n")
             drop_answer = input("### Would you like to drop column(s)?\nType y for Yes\nType n for No\n\nYour input:")
@@ -74,19 +77,47 @@ class Preprocessing():
                     drop_col = drop_col = re.sub(r"\s", "", drop_col).split(",")
                     end = self.dataset.drop(drop_col, axis = 1)
                     print("\n### Column(s) have been removed")
-                    return pd.DataFrame(end)
+                    return pd.DataFrame(end), target, features
                 
                 if drop_answer == "n":
-                    return 
-                
+                    return pd.DataFrame(end) , target, features
+
             except:
                 print("\n### Invalid input. Please carefully read the input requirements.")
                 continue
+            
     
     def microbiome_modules(self):
         "Provides the user advanced microbiome preprocessing options"
         micro_answ = input("### Would you like to enable advanced microbiome transformation preprocessing options?\nType y for Yes\nType n for No\n\nYour input:").lower()
         micro_answ = re.sub(r"\s", "", micro_answ)
+        
+        def log_10(df):
+            return np.log(multiplicative_replacement(df))
+
+        def micro_trans(choice, data):
+            "Provides the user to opt for several compositional analysis transformations"
+            "Several options can be choosen, which will be performed based on order provided by the user"
+            data = pd.DataFrame(data)
+            data_temp = data.values
+            for i in choice:
+                options = {"1" : multiplicative_replacement(data_temp),
+                              "2" : clr(data_temp),
+                              "3" : clr_inv(data_temp),
+                              "4" : ilr(data_temp),
+                              "5" : ilr_inv(data_temp),
+                              "6" : alr(data_temp),
+                              "7" : alr_inv(data_temp),
+                              "8" : log_10(data_temp),
+                              "9" : data_temp}
+
+                data_temp = pd.DataFrame(options[i])
+                data_temp.columns = data.columns
+                target = data_temp.iloc[:, 0]    # Splits the dataset into the target column
+                features = data_temp.iloc[: , 1:] # Splits the dataset into the features column(s)
+
+            return pd.DataFrame(data_temp), pd.DataFrame(target), features
+        
         if micro_answ == "y":
             print("\n### The following microbiome analysis preprocessing options are available:")
             print("1)  MR  : Replace all zeros with small non-zero values.")
@@ -97,52 +128,29 @@ class Preprocessing():
             print("6)  ALR  :  Additive log ratio transformation  # Requires MR # ")
             print("7)  ALR-i  :  Inverse additive log ratio transformation # Requires MR #")
             print("8)  Log10  :  Log 10 transformation # No diversity plot optional #")
+            print("9)  No preprocessing")
             
             trans_ans = input("\n### Please provide which transformation you would like to perform as follow:\nExample first zero replacement followed by CLR: 1,2.\nYour input:")
             trans_ans = re.sub(r"\s", "", trans_ans).split(",")
-            
-            def log_10(df):
-                return np.log(multiplicative_replacement(df))
-            
-            def micro_trans(choice, data):
-                "Provides the user to opt for several compositional analysis transformations"
-                "Several options can be choosen, which will be performed based on order provided by the user"
-                data = pd.DataFrame(data)
-                data_temp = data.values
-                for i in choice:
-                    options = {"1" : multiplicative_replacement(data_temp),
-                                  "2" : clr(data_temp),
-                                  "3" : clr_inv(data_temp),
-                                  "4" : ilr(data_temp),
-                                  "5" : ilr_inv(data_temp),
-                                  "6" : alr(data_temp),
-                                  "7" : alr_inv(data_temp),
-                                  "8" : log_10(data_temp)}
-            
-                    data_temp = pd.DataFrame(options[i])
-                    data_temp.columns = data.columns
-                    target = data_temp.iloc[:, 0]    # Splits the dataset into the target column
-                    features = data_temp.iloc[: , 1:] # Splits the dataset into the features column(s)
 
-                return pd.DataFrame(data_temp), pd.DataFrame(target), features
-            
             end_dataset, target, features = micro_trans(trans_ans, self.dataset)
             print("\n--------------------\nYour dataset has been transformed\n--------------------")
             return end_dataset, target, features
 
         
         if micro_answ == "n":
-            print("End")
-            return self.dataset, target, features    
+            print("No preprocessing")
+            end_dataset, target, features = micro_trans("9", self.dataset)
+            return end_dataset, target, features    
 
 
     def diversity_plot(self, data):
         "Returns a stacked compositional plot based on the users data"
-        data.iloc[:,1:] = closure(data.iloc[:,1:])
         print("Would you like to display a diversity plot?")
         request_div = input("Type y for Yes\nType n for No\nYour input:").lower()
         if request_div == "y":
             print("For which target would you like to display a diversity plot?")
+            data.iloc[:,1:] = closure(data.iloc[:,1:])
             target = input("Provide the exact target(\nFor example: BMI,Age\nYour input:")
             target =  re.sub(r"\s", "", target)
 
@@ -172,6 +180,7 @@ class Preprocessing():
                 inplace=True)
 
             # Plot a barplot 
+            print("Loading plot, please wait...")
             fig = df_bins.T.plot(kind='bar', 
                                  stacked=True, 
                                  legend=None, 
@@ -180,15 +189,17 @@ class Preprocessing():
             plt.ylabel("Relative abundance")
             plt.title("Diversity plot {}".format(target))
             plt.show()
-
+        
             return df_bins
+            
+        if request_div == "n":
+            return data
 
-print("Loading the data... Please wait.")    
-
+        
 def script_preprocessing(df):
     "A function to run the preprocessing classes"
     sorted_data = Preprocessing(df).sort_dataset()  # target and features are extracted from dataset
-    sorted_data = Preprocessing(sorted_data).drop_column()
+    sorted_data, target, features = Preprocessing(sorted_data).drop_column()
     df_bins = []
     while True:
         try:
