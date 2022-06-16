@@ -8,18 +8,28 @@ import Metrics
 import Logging
 import xgboost_algorithm
 import Gradient_boosting
-import Preprocessing
+import Preprocess
 import pandas as pd
-# import Recommendation
+import Advice
 
-models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG, 'gradientboost': Gradient_boosting.Gradientboost}
-scores_dict = {}
 
-df_ID = pd.read_csv('Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
-df_micro = pd.read_csv('Data/MetaPhlan3.csv', index_col=0, sep="\t") 
+
+## The Preprocess module requests a datafile. THis is for now only in a pickle extension. Run this snippet to store the combined dataset in a pickle format:
+df_ID = pd.read_csv('Covariates.csv', index_col=0, sep="\t")   # Example file is used
+df_micro = pd.read_csv('MetaPhlan3.csv', index_col=0, sep="\t") 
 df_test = pd.concat([df_ID, df_micro], axis=1)
 df_test.drop("X1172", axis=1, inplace=True)
 df_test.dropna(inplace=True)
+df_test.to_pickle("microbiome_df.pkl")
+
+
+## Snippet to run from Preprocess till advice:
+end_data, target, features, df_bins = Preprocess.script_preprocessing()   # Use microbiome_df.pkl as file
+end_result = Advice.script_recommendation(end_data, features)
+
+
+models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG, 'gradientboost': Gradient_boosting.Gradientboost}
+scores_dict = {}
 
 def main():
     # Parse commandline arguments
