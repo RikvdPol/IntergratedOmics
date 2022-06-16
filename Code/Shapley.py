@@ -44,7 +44,7 @@ class Shap():
         display(shap.summary_plot(shap_values, X_sampled, plot_type="bar"))
         
 
-def script_shap(X_train, model):
+def script_shapley(X_train, model):
     Shap(X_train, model).shap_test()
     
 
