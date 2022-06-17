@@ -10,4 +10,11 @@ class XG(Abstractalgorithm):
         model = XGBRegressor()
         return model, cv
 
+class RF(AbstractAlgorithm):
+    
+    def define_model(self, n_splits=10, n_repeats=3, random_state=None):
+        cv = RepeatedKFold(n_splits=n_splits, n_repeats=n_repeats, random_state=random_state)
 
+        model = RandomForestClassifier()
+        
+        return model, cv
