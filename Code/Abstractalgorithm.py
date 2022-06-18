@@ -10,27 +10,28 @@ __license__ = "MIT"
 __email__ = "rikvdpol93@gmail.com"
 __status__ = "Version 1.0"
 
+
 class Abstractalgorithm:
     def __init__(self, file, labelname):
         self.file = file
         self.labelname = labelname
-        self.labels = None
+        # self.labels = None
 
-    def extract_labels(self):
-        sep = os.path.sep
-        self.file = self.file.dropna(axis=0)
-        logs = Logging.Logging()
-        try:
-            self.labels = self.file[self.labelname]
-            msg = (f"Columnname {self.labelname} used as predictor label")
-            logs.create_logs(self.__class__.__name__, msg)
-
-        except KeyError as e:
-            msg = f"{e}: Labelname {self.labelname} not present in data"
-            logs.create_logs(self.__class__.__name__, msg)
-            sys.exit(0)
-
-        self.file = self.file.drop([self.labelname, "Pseudo", "Antibody_batch"], axis=1)
+    # def extract_labels(self):
+    #     sep = os.path.sep
+    #     self.file = self.file.dropna(axis=0)
+    #     logs = Logging.Logging()
+    #     try:
+    #         self.labels = self.file[self.labelname]
+    #         msg = (f"Columnname {self.labelname} used as predictor label")
+    #         logs.create_logs(self.__class__.__name__, msg)
+    #
+    #     except KeyError as e:
+    #         msg = f"{e}: Labelname {self.labelname} not present in data"
+    #         logs.create_logs(self.__class__.__name__, msg)
+    #         sys.exit(0)
+    #
+    #     self.file = self.file.drop([self.labelname, "Pseudo", "Antibody_batch"], axis=1)
 
     def split_data(self, test_size=0.3, random_state=None):
         """
@@ -44,7 +45,7 @@ class Abstractalgorithm:
         to previous instances.
         """
         X_train, X_test, y_train, y_test = train_test_split(self.file,
-                                                            self.labels,
+                                                            self.labelname,
                                                             test_size=test_size,
                                                             random_state=random_state)
 
@@ -56,7 +57,7 @@ class Abstractalgorithm:
 
     def evaluate_model(self, model, cv):
         # metric = Metrics.Metrics()
-        scores = cross_val_score(model, self.file, self.labels, scoring=make_scorer(mean_absolute_error), cv=cv, n_jobs=-1)
+        scores = cross_val_score(model, self.file, self.labelname, scoring=make_scorer(mean_absolute_error), cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
         return scores
 

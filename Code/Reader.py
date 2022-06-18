@@ -31,7 +31,7 @@ class Reader:
         logs = Logging.Logging()
         try:
             data = pd.read_csv(self.file, sep="\t", header=self.header)
-            msg = (f'Reading of {self.file} successful')
+            msg = f'Reading of {self.file} successful'
             logs.create_logs(self.__class__.__name__, msg)
             return data
     

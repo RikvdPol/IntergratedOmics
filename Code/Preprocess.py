@@ -212,11 +212,12 @@ class Preprocessing():
         if request_div == "n":
             return data
 
-        
+
 def script_preprocessing():
     "A function to run the preprocessing classes"
     "Df file only accepts pkl formats currently"
-    file_name = input("Provide the filename with extention. For example:  microbiome_data.pkl\nMake sure the file is in the same directory.\nYour input: ")
+    file_name = input("Provide the filename with extention. For example:  microbiome_df.pkl\nMake sure the file is in "
+                      "the same directory.\nYour input: ")
     with open(file_name, 'rb') as f:
         df = pickle.load(f)
         
@@ -227,19 +228,20 @@ def script_preprocessing():
         try:
             end_data, target, features = Preprocessing(sorted_data).microbiome_modules(target)
             df_bins = Preprocessing(end_data).diversity_plot(end_data) 
-            print("\n--------------------\nData preprocessing complete. Proceeding to next step.\n--------------------\n.")
+            print("\n--------------------\nData preprocessing complete. Proceeding to next "
+                  "step.\n--------------------\n.")
             return end_data, target, features, df_bins
         except:
-            print("\n--------------------\nNo diversity plot possible with the current transformations.\n--------------------")
-            print("Reminder: Log-oriented transformations leading to negative numbers do not work in\ncompositional plots.")
-            temp_choice = input("\nWould you like to return to the data preprocessing part to change your\ndata transformation choices to enable a diversity plot?\nType n for No\nType y for Yes\nYour input: ")
+            print("\n--------------------\nNo diversity plot possible with the current "
+                  "transformations.\n--------------------")
+            print("Reminder: Log-oriented transformations leading to negative numbers do not work in\ncompositional "
+                  "plots.")
+            temp_choice = input("\nWould you like to return to the data preprocessing part to change your\ndata "
+                                "transformation choices to enable a diversity plot?\nType n for No\nType y for "
+                                "Yes\nYour input: ")
             if temp_choice == "y":
                 continue
             if temp_choice == "n":
                 print("\n--------------------\nProceeding without proving a diversity plot\n--------------------\n.")
                 df_bins = Preprocessing(end_data).diversity_plot(end_data)
                 return end_data, target, features, df_bins
-            
-            
-    
-    

@@ -6,19 +6,18 @@ from pca import pca
 
 
 class DimensionalityReduction:
-    def __init__(self, data):
-        self.data = data
-        self.X = None
-        self.y = None
+    def __init__(self, X, y):
+        # self.data = data
+        self.X = X
+        self.y = y
         self.results = None
-        self.model = None
 
-    def preparation(self, label="Gender"):
-        data = self.data.dropna()
-        self.y = data[label]
-        self.X = data.drop(columns=["Pseudo", "Antibody_batch"])
+    # def preparation(self, label="Gender"):
+    #     data = self.data.dropna()
+    #     self.y = data[label]
+    #     self.X = data.drop(columns=["Pseudo", "Antibody_batch"])
 
-    def construction(self, components=3):
+    def construction(self, components=10):
         model = pca(n_components=components, normalize=True)
         self.results = model.fit_transform(self.X)
         return model
@@ -27,7 +26,7 @@ class DimensionalityReduction:
         model.plot(figsize=(10, 8))
 
     def construct_bi_plot(self, model):
-        model.biplot(n_feat=3, legend=True, figsize=(16, 12), y=self.y, label=True)
+        model.biplot(n_feat=3, legend=True, figsize=(10, 8), y=self.y, label=True)
 
     def get_loadings(self):
         return self.results["loadings"]
