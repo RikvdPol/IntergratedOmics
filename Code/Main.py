@@ -37,10 +37,10 @@ def main():
                    'gradientboost': Gradient_boosting.Gradientboost}
 
 
-    # reductions = DimensionalityReduction.DimensionalityReduction(end_data, target)
-    # mod = reductions.construction()
-    # reductions.construct_scree_plot(mod)
-    # reductions.construct_bi_plot(mod)
+    reductions = DimensionalityReduction.DimensionalityReduction(end_data, target)
+    mod = reductions.construction()
+    reductions.construct_scree_plot(mod)
+    reductions.construct_bi_plot(mod)
 
 
     for model in models_dict:

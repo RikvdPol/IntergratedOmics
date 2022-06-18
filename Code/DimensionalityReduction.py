@@ -26,7 +26,8 @@ class DimensionalityReduction:
         model.plot(figsize=(10, 8))
 
     def construct_bi_plot(self, model):
-        model.biplot(n_feat=3, legend=True, figsize=(10, 8), y=self.y, label=True)
+        model.biplot(n_feat=3, legend=False, figsize=(10, 8), label=True)
+        # , y = self.y
 
     def get_loadings(self):
         return self.results["loadings"]
