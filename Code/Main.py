@@ -12,6 +12,7 @@ import Preprocess
 import pandas as pd
 import Advice
 import DimensionalityReduction
+import Shapley
 
 
 def main():
@@ -48,46 +49,17 @@ def main():
         algorithm = models_dict[model](features, target)
         X_train, X_test, y_train, y_test = algorithm.split_data()
         clf, cv = algorithm.define_model()
-        elastic_model = algorithm.train_model(clf, X_train, y_train)
-        predictions = algorithm.predict(elastic_model, X_test)
-
-        scores = algorithm.evaluate_model(clf, cv)
-        metrics = Metrics.Metrics(y_test, predictions)
-        scores_dict[model] = scores
-
-    visuals = Visualisations.Visualisations(scores_dict, cv)
-    visuals.boxplot()
-
-    # Parse commandline arguments
-    # parser = argparse.ArgumentParser()
-    # parser.add_argument("-f", help="File to be read", type=str, required=True)
-    # args = parser.parse_args()
-    # models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG, 'gradientboost': Gradient_boosting.Gradientboost}
-    # scores_dict = {}
-    # Read the data provided via the commandline
-    # read = Reader.Reader(args.f, 0)
-    # data = read.reader()
-    # end_data, target, features, df_bins = Preprocessing.script_preprocessing(df_test)
-    #
-    # for model in models_dict:
-    #     print(models_dict[model])
-    #     algorithm = models_dict[model](end_data, target)
-    #     X_train, X_test, y_train, y_test = algorithm.split_data()
-    #     algorithm.extract_labels()
-    #     elastic_model = algorithm.train_model(X_train, y_train)
+        shap = Shapley.Shap(X_train, clf)
+        shap.shap_test()
+    #     elastic_model = algorithm.train_model(clf, X_train, y_train)
     #     predictions = algorithm.predict(elastic_model, X_test)
-    #     model, cv = algorithm.define_model()
-    #     scores = algorithm.evaluate_model(model, cv)
-    #
+
+    #     scores = algorithm.evaluate_model(clf, cv)
     #     metrics = Metrics.Metrics(y_test, predictions)
-    #     r2, mse, mae, rmse = metrics.get_scores()
-    #     print("Input file: %s" % args.f)
-    #
     #     scores_dict[model] = scores
-    #
+
     # visuals = Visualisations.Visualisations(scores_dict, cv)
     # visuals.boxplot()
-
 
 if __name__ == "__main__":
     sys.exit(main())

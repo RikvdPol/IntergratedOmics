@@ -9,10 +9,11 @@ from sklearn import model_selection, ensemble
 from sklearn.metrics import mean_squared_error
 from sklearn.linear_model import LinearRegression
 from sklearn.neighbors import KNeighborsClassifier
-from sklearn.preprocessing import Imputer, LabelEncoder
+# from sklearn.preprocessing import Imputer, LabelEncoder
 from sklearn.model_selection import KFold, cross_val_score, train_test_split
 from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin, clone
 import shap
+from IPython.display import display
 
 
 
@@ -35,13 +36,34 @@ class Shap():
         print("\n## Contributing effect of a single feature vs the model output")
         print("Shap values represents a feature's responsability for a change in a selected output")
         print("Vertical dispersion represents the interaction vs the other features")
-        display(shap.force_plot(explainer.expected_value, shap_values, X_train))
+        display(shap.force_plot(explainer.expected_value, shap_values, self.X_train))
         
         print("\n## Mean absolute contribution for each feature")
         display(shap.summary_plot(shap_values, X_sampled))
         
         print("\n## Mean absolute contribution for each feature")
         display(shap.summary_plot(shap_values, X_sampled, plot_type="bar"))
+
+
+        # x = np.linspace(0, 2 * np.pi, 400)
+        # y = np.sin(x ** 2)
+
+        # fig, axs = plt.subplots(2, 2, figsize=(30,20))
+        # axs[0, 0].plot(x, y)
+        # axs[0, 0].set_title('Axis [0, 0]')
+        # axs[0, 1].plot(x, y, 'tab:orange')
+        # axs[0, 1].set_title('Axis [0, 1]')
+        # axs[1, 0].plot(x, -y, 'tab:green')
+        # axs[1, 0].set_title('Axis [1, 0]')
+        # axs[1, 1].plot(x, -y, 'tab:red')
+        # axs[1, 1].set_title('Axis [1, 1]')
+
+        # for ax in axs.flat:
+        #     ax.set(xlabel='x-label', ylabel='y-label')
+
+        # # Hide x labels and tick labels for top plots and y ticks for right plots.
+        # for ax in axs.flat:
+        #     ax.label_outer()
         
 
 def script_shapley(X_train, model):
