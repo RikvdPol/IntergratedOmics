@@ -111,7 +111,9 @@ class Preprocessing():
             "Provides the user to opt for several compositional analysis transformations"
             "Several options can be choosen, which will be performed based on order provided by the user"
             data = pd.DataFrame(data)
-            data_temp = data.values
+            data_temp = data.values.astype(float)
+            # print(data_temp.astype(float))
+
             for i in choice:
                 options = {"1" : multiplicative_replacement(data_temp),
                               "2" : clr(data_temp),
@@ -229,7 +231,7 @@ def script_preprocessing():
             end_data, target, features = Preprocessing(sorted_data).microbiome_modules(target)
             df_bins = Preprocessing(end_data).diversity_plot(end_data) 
             print("\n--------------------\nData preprocessing complete. Proceeding to next "
-                  "step.\n--------------------\n.")
+                    "step.\n--------------------\n.")
             return end_data, target, features, df_bins
         except:
             print("\n--------------------\nNo diversity plot possible with the current "

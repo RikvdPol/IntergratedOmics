@@ -18,8 +18,8 @@ def main():
 
 
     # The Preprocess module requests a datafile. THis is for now only in a pickle extension. Run this snippet to store the combined dataset in a pickle format:
-    df_ID = pd.read_csv('../Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
-    df_micro = pd.read_csv('../Data/MetaPhlan3.csv', index_col=0, sep="\t")
+    df_ID = pd.read_csv('Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
+    df_micro = pd.read_csv('Data/MetaPhlan3.csv', index_col=0, sep="\t")
     df_test = pd.concat([df_ID, df_micro], axis=1)
     df_test.drop("X1172", axis=1, inplace=True)
     df_test.dropna(inplace=True)
