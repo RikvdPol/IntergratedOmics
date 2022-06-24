@@ -23,7 +23,7 @@ class Shap():
         self.model = model
 
         # model should be fit
-        self.explainer = shap.Explainer(model)
+        self.explainer = shap.Explainer(model, X_train)
         
     def shap_test(self):
         "Provides the user both local and global shap values based on the Game theory"
