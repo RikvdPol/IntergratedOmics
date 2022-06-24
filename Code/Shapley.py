@@ -23,7 +23,7 @@ class Shap():
         self.model = model
 
         # model should be fit
-        self.explainer = shap.Explainer(model, X_train)
+        # self.explainer = shap.Explainer(model, X_train)
         
     def shap_test(self):
         "Provides the user both local and global shap values based on the Game theory"
@@ -68,28 +68,28 @@ class Shap():
         # for ax in axs.flat:
         #     ax.label_outer()
 
-    def plot_waterfall(self, idx, max_display=10):
-        shap_values = self.explainer(self.X_train)
-        display(shap.plots.waterfall(shap_values[idx], max_display=max_display))
+    # def plot_waterfall(self, idx, max_display=10):
+    #     shap_values = self.explainer(self.X_train)
+    #     display(shap.plots.waterfall(shap_values[idx], max_display=max_display))
 
-    def plot_force(self, idx=None, max_display=10):
-        shap_values = self.explainer(self.X_train)
-        if idx:
-            display(shap.plots.bar(shap_values[idx], max_display=max_display))
-        else:
-            display(shap.plots.bar(shap_values, max_display=max_display))
+    # def plot_force(self, idx=None, max_display=10):
+    #     shap_values = self.explainer(self.X_train)
+    #     if idx:
+    #         display(shap.plots.bar(shap_values[idx], max_display=max_display))
+    #     else:
+    #         display(shap.plots.bar(shap_values, max_display=max_display))
 
-    def plot_beeswarm(self, max_display=10):
-        shap_values = self.explainer(self.X_train)
-        display(shap.plots.beeswarm(shap_values, max_display=max_display))
+    # def plot_beeswarm(self, max_display=10):
+    #     shap_values = self.explainer(self.X_train)
+    #     display(shap.plots.beeswarm(shap_values, max_display=max_display))
 
-    def plot_heatmap(self, max_display=10):
-        shap_values = self.explainer(self.X_train)
-        display(shap.plots.heatmap(shap_values, max_display=max_display))
+    # def plot_heatmap(self, max_display=10):
+    #     shap_values = self.explainer(self.X_train)
+    #     display(shap.plots.heatmap(shap_values, max_display=max_display))
 
-    def plot_scatter(self, col):
-        shap_values = self.explainer(self.X_train)
-        display(shap.plots.scatter(shap_values[:, col], color=shap_values))
+    # def plot_scatter(self, col):
+    #     shap_values = self.explainer(self.X_train)
+    #     display(shap.plots.scatter(shap_values[:, col], color=shap_values))
 
         
 
