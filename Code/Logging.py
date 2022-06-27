@@ -12,7 +12,8 @@ class Logging:
         pass
 
     def create_logs(self, classname, msg):
-        path = Path(f"../Logfiles/{classname}.log")
+        path = Path(f"Logfiles/{classname}.log")
+        print(msg)
         logging.basicConfig(filename=path,
                             filemode='a+',
                             format='%(asctime)s %(message)s',
