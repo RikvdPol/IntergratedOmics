@@ -1,20 +1,23 @@
 "Author: Hicham Jemil"
 
-import numpy as np
-import pandas as pd
+# import numpy as np
+# import pandas as pd
+# import matplotlib.pyplot as plt
+# import seaborn as sns
+# from collections import defaultdict
+# from sklearn import model_selection, ensemble
+# from sklearn.metrics import mean_squared_error
+# from sklearn.linear_model import LinearRegression
+# from sklearn.neighbors import KNeighborsClassifier
+# from sklearn.model_selection import KFold, cross_val_score, train_test_split
+# from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin, clone
+
 import matplotlib.pyplot as plt
-import seaborn as sns
-from collections import defaultdict
-from sklearn import model_selection, ensemble
-from sklearn.metrics import mean_squared_error
-from sklearn.linear_model import LinearRegression
-from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.preprocessing import Imputer, LabelEncoder
-from sklearn.model_selection import KFold, cross_val_score, train_test_split
-from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin, clone
 import shap
 from IPython.display import display
-
+from shap import maskers
+from shap import summary_plot
+from sklearn.linear_model import ElasticNet
 
 
 class Shap():
@@ -25,46 +28,37 @@ class Shap():
     def shap_test(self):
         "Provides the user both local and global shap values based on the Game theory"
         shap.initjs()
-        X_sampled = self.X_train.sample(100, random_state=10)  #in order to improve computing efficiency, a random v is chosen
-        explainer = shap.TreeExplainer(self.model)
+        X_sampled = self.X_train.sample(100, random_state=10)
+        explainer = None
+
+        if "ElasticNet" in str(type(self.model)):
+            masker = maskers.Independent(data=self.X_train)
+            explainer = shap.explainers.Linear(self.model, masker=masker)
+        elif "XGBRegressor" in str(type(self.model)):
+            explainer = shap.TreeExplainer(self.model)
+
         shap_values = explainer.shap_values(X_sampled)
         print("## Contributing features to diviate from the base value")
         print("Features in red contribute to a higher prediction")
         print("Features in blue contribute to a lower prediction")
-        display(shap.force_plot(explainer.expected_value, shap_values[0,:], X_sampled.iloc[0,:]))
-        
+        shap.force_plot(explainer.expected_value, shap_values[0, :], X_sampled.iloc[0, :], matplotlib=True, show=False)
+
         print("\n## Contributing effect of a single feature vs the model output")
         print("Shap values represents a feature's responsability for a change in a selected output")
         print("Vertical dispersion represents the interaction vs the other features")
-        display(shap.force_plot(explainer.expected_value, shap_values, self.X_train))
-        
+
         print("\n## Mean absolute contribution for each feature")
-        display(shap.summary_plot(shap_values, X_sampled))
-        
+
         print("\n## Mean absolute contribution for each feature")
-        display(shap.summary_plot(shap_values, X_sampled, plot_type="bar"))
 
 
-        # x = np.linspace(0, 2 * np.pi, 400)
-        # y = np.sin(x ** 2)
-
-        # fig, axs = plt.subplots(2, 2, figsize=(30,20))
-        # axs[0, 0].plot(x, y)
-        # axs[0, 0].set_title('Axis [0, 0]')
-        # axs[0, 1].plot(x, y, 'tab:orange')
-        # axs[0, 1].set_title('Axis [0, 1]')
-        # axs[1, 0].plot(x, -y, 'tab:green')
-        # axs[1, 0].set_title('Axis [1, 0]')
-        # axs[1, 1].plot(x, -y, 'tab:red')
-        # axs[1, 1].set_title('Axis [1, 1]')
-
-        # for ax in axs.flat:
-        #     ax.set(xlabel='x-label', ylabel='y-label')
-
-        # # Hide x labels and tick labels for top plots and y ticks for right plots.
-        # for ax in axs.flat:
-        #     ax.label_outer()
-        
+        plt.figure(figsize=(10,5))
+        plt.subplot(1,2,1)
+        summary_plot(shap_values, X_sampled, show=False, plot_size=None)
+        plt.subplot(1,2,2)
+        summary_plot(shap_values, X_sampled, plot_type="bar", show=False, plot_size=None)
+        plt.tight_layout()
+        plt.show()
 
 def script_shapley(X_train, model):
     Shap(X_train, model).shap_test()

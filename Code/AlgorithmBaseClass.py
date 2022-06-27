@@ -10,11 +10,11 @@ __license__ = "MIT"
 __email__ = "rikvdpol93@gmail.com"
 __status__ = "Version 1.0"
 
-
-class Abstractalgorithm:
+class AlgorithmBaseClass:
     def __init__(self, file, labelname):
         self.file = file
         self.labelname = labelname
+        self.labels = None
 
     def split_data(self, test_size=0.3, random_state=None):
         """
@@ -28,19 +28,25 @@ class Abstractalgorithm:
         to previous instances.
         """
         X_train, X_test, y_train, y_test = train_test_split(self.file,
-                                                            self.labelname,
+                                                            self.labels,
                                                             test_size=test_size,
                                                             random_state=random_state)
 
         return X_train, X_test, y_train, y_test
 
     def predict(self, model, X_test):
+        """
+        Makes predictions on the test dataset by using the trained model.
+        """
         predictions = model.predict(X_test)
         return predictions
 
     def evaluate_model(self, model, cv):
-        # metric = Metrics.Metrics()
-        scores = cross_val_score(model, self.file, self.labelname, scoring=make_scorer(mean_absolute_error), cv=cv, n_jobs=-1)
+        """
+        Evaluate the model using the cross_val_score function. The model is evaluated several times and the results of the
+        cost function are saved. This will later be used for the plotting of the boxplots.
+        """
+        scores = cross_val_score(model, self.file, self.labels, scoring=make_scorer(mean_absolute_error), cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
         return scores
 
@@ -48,6 +54,9 @@ class Abstractalgorithm:
         pass
 
     def train_model(self, clf, X_train, y_train):
+        """
+        Train the previously defined model by providing it with training data and the corresponding labels.
+        """
         model = clf.fit(X_train, y_train)
         return model
 
