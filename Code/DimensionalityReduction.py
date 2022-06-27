@@ -13,12 +13,19 @@ __status__ = "Version 1.0"
 
 
 class DimensionalityReduction:
+    """
+    Perform Principal Component Analysis on the provided data. Plots the scree and biplot. The loadings
+    and principal components can be gathered by using their respective get functions.
+    """
     def __init__(self, X, y):
         self.X = X
         self.y = y
         self.results = None
 
     def construction(self, components=10):
+        """
+        Set up the construction of the principal component analysis. No plotting is performed.
+        """
         logs = Logging.Logging()
         try:
             model = pca(n_components=components, normalize=True)
@@ -33,6 +40,10 @@ class DimensionalityReduction:
 
 
     def construct_scree_plot(self, model):
+        """
+        Construct the scree plot of the provided data. The scree plot shows how many principal components
+        are needed to explain variance in the data. The cumulative explained variance is shows as a black line.
+        """
         logs = Logging.Logging()
         try:
             model.plot(figsize=(10, 8))
@@ -45,9 +56,14 @@ class DimensionalityReduction:
             
 
     def construct_bi_plot(self, model):
+        """
+        Construct the biplot of the principal component analysis. The biplot is a combination of the loadings and the scoring plot.
+        Loadings show the importance of each feature in the component, and the scores is the point where that observation project onto
+        the direction.
+        """
         logs = Logging.Logging()
         try:
-            model.biplot(n_feat=3, legend=False, figsize=(10, 8), label=True)
+            model.biplot(n_feat=3, legend=False, figsize=(10, 8), label=False, alpha_transparency=0.4)
             msg = (f"Biplot successfully created")
             logs.create_logs(self.__class__.__name__, msg)
         except BaseException as e:
