@@ -1,5 +1,13 @@
 # A software to increase machine learning interpretability
 
+# Table of Contens
+1. [Description](#Description)
+2. [Data](#Data)
+3. [Usability](#Usability)
+4. [Installtions](#Installations)
+5. [Software](#Software)
+6. [Visualisations](#Visualisations)
+
 
 # Description
 
@@ -23,6 +31,9 @@ The LifeLines-DEEP meta genomics sequencing data are freely available online.
 
 # Usability
 
+<img src="Visualisations/Usage.gif" alt="dashboardGIF" height="100" width="100%">
+
+
 # Software
 
 All of the code was written in [python 3.8.13](https://www.python.org/downloads/release/python-3813/).
@@ -30,10 +41,28 @@ In addition, several modules were used in order for the code to gain proper func
 packages in python, and these will not be mentioned here. These packages are available in the supplementary materials
 in the project paper.
 
-| Package | Version | Usage                                                   |
-|---------|---------|---------------------------------------------------------|
-| sklearn | 1.0.2   | Used to implement several  machine learning algorithms. |
-| Numpy   | 1.21.5  | Uses for several calculations                           |
+| Package | Version | Usage                                                    |
+|---------|---------|----------------------------------------------------------|
+| sklearn | 1.0.2   | Used to implement several  machine learning algorithms.  |
+| Numpy   | 1.21.5  | Uses for several calculations                            |
+| Logging | 3.8.13  | Used to create logfile explaining events during code run |
+| shap    |         |                                                          |
+| xgboost |         |                                                          |
+
+
+# Installations
+Install the packages with either conda or pip.
+
+conda:
+```bash
+  conda install <PACKAGE>=<VERSION>
+```
+
+pip
+```bash
+  pip install <PACKAGE>==<VERSION>
+```
+
 
 # Visualisations
 
