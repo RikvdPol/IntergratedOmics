@@ -4,8 +4,9 @@
 1. [Description](#Description)
 2. [Data](#Data)
 3. [Usability](#Usability)
-4. [Software](#Software)
-5. [Visualisations](#Visualisations)
+4. [Installtions](#Installations)
+5. [Software](#Software)
+6. [Visualisations](#Visualisations)
 
 
 # Description
@@ -30,6 +31,9 @@ The LifeLines-DEEP meta genomics sequencing data are freely available online.
 
 # Usability
 
+<img src="Visualisations/Usage.gif" alt="dashboardGIF" height="100" width="100%">
+
+
 # Software
 
 All of the code was written in [python 3.8.13](https://www.python.org/downloads/release/python-3813/).
@@ -44,6 +48,20 @@ in the project paper.
 | Logging | 3.8.13  | Used to create logfile explaining events during code run |
 | shap    |         |                                                          |
 | xgboost |         |                                                          |
+
+
+# Installations
+Install the packages with either conda or pip.
+
+conda:
+```bash
+  conda install <PACKAGE>=<VERSION>
+```
+
+pip
+```bash
+  pip install <PACKAGE>==<VERSION>
+```
 
 
 # Visualisations
