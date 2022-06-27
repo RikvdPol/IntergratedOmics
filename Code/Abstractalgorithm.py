@@ -15,23 +15,6 @@ class Abstractalgorithm:
     def __init__(self, file, labelname):
         self.file = file
         self.labelname = labelname
-        # self.labels = None
-
-    # def extract_labels(self):
-    #     sep = os.path.sep
-    #     self.file = self.file.dropna(axis=0)
-    #     logs = Logging.Logging()
-    #     try:
-    #         self.labels = self.file[self.labelname]
-    #         msg = (f"Columnname {self.labelname} used as predictor label")
-    #         logs.create_logs(self.__class__.__name__, msg)
-    #
-    #     except KeyError as e:
-    #         msg = f"{e}: Labelname {self.labelname} not present in data"
-    #         logs.create_logs(self.__class__.__name__, msg)
-    #         sys.exit(0)
-    #
-    #     self.file = self.file.drop([self.labelname, "Pseudo", "Antibody_batch"], axis=1)
 
     def split_data(self, test_size=0.3, random_state=None):
         """
