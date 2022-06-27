@@ -12,9 +12,13 @@ from sklearn.neighbors import KNeighborsClassifier
 # from sklearn.preprocessing import Imputer, LabelEncoder
 from sklearn.model_selection import KFold, cross_val_score, train_test_split
 from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin, clone
+
+
 import shap
 from IPython.display import display
-
+from shap import maskers
+from shap import summary_plot
+from sklearn.linear_model import ElasticNet
 
 
 class Shap():
@@ -25,24 +29,31 @@ class Shap():
     def shap_test(self):
         "Provides the user both local and global shap values based on the Game theory"
         shap.initjs()
-        X_sampled = self.X_train.sample(100, random_state=10)  #in order to improve computing efficiency, a random v is chosen
-        explainer = shap.TreeExplainer(self.model)
+        X_sampled = self.X_train.sample(100, random_state=10)
+        explainer = None
+
+        if "ElasticNet" in str(type(self.model)):
+            masker = maskers.Independent(data=self.X_train)
+            explainer = shap.explainers.Linear(self.model, masker=masker)
+        elif "XGBRegressor" in str(type(self.model)):
+            explainer = shap.TreeExplainer(self.model)
+
         shap_values = explainer.shap_values(X_sampled)
         print("## Contributing features to diviate from the base value")
         print("Features in red contribute to a higher prediction")
         print("Features in blue contribute to a lower prediction")
-        display(shap.force_plot(explainer.expected_value, shap_values[0,:], X_sampled.iloc[0,:]))
-        
+        shap.force_plot(explainer.expected_value, shap_values[0, :], X_sampled.iloc[0, :], matplotlib=True)
+
         print("\n## Contributing effect of a single feature vs the model output")
         print("Shap values represents a feature's responsability for a change in a selected output")
         print("Vertical dispersion represents the interaction vs the other features")
-        display(shap.force_plot(explainer.expected_value, shap_values, self.X_train))
-        
+        # shap.force_plot(explainer.expected_value, shap_values, self.X_train, matplotlib=True)
+
         print("\n## Mean absolute contribution for each feature")
-        display(shap.summary_plot(shap_values, X_sampled))
-        
+        summary_plot(shap_values, X_sampled)
+
         print("\n## Mean absolute contribution for each feature")
-        display(shap.summary_plot(shap_values, X_sampled, plot_type="bar"))
+        summary_plot(shap_values, X_sampled, plot_type="bar")
 
 
         # x = np.linspace(0, 2 * np.pi, 400)

@@ -19,8 +19,8 @@ def main():
 
 
     # The Preprocess module requests a datafile. THis is for now only in a pickle extension. Run this snippet to store the combined dataset in a pickle format:
-    df_ID = pd.read_csv('Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
-    df_micro = pd.read_csv('Data/MetaPhlan3.csv', index_col=0, sep="\t")
+    df_ID = pd.read_csv('../Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
+    df_micro = pd.read_csv('../Data/MetaPhlan3.csv', index_col=0, sep="\t")
     df_test = pd.concat([df_ID, df_micro], axis=1)
     df_test.drop("X1172", axis=1, inplace=True)
     df_test.dropna(inplace=True)
@@ -34,8 +34,8 @@ def main():
     end_result = Advice.script_recommendation(end_data, features)
 
     scores_dict = {}
-    models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG,
-                   'gradientboost': Gradient_boosting.Gradientboost}
+    models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG}
+
 
 
     reductions = DimensionalityReduction.DimensionalityReduction(end_data, target)
@@ -49,10 +49,10 @@ def main():
         algorithm = models_dict[model](features, target)
         X_train, X_test, y_train, y_test = algorithm.split_data()
         clf, cv = algorithm.define_model()
+        clf = algorithm.train_model(clf, X_train, y_train)
         shap = Shapley.Shap(X_train, clf)
         shap.shap_test()
-    #     elastic_model = algorithm.train_model(clf, X_train, y_train)
-    #     predictions = algorithm.predict(elastic_model, X_test)
+    #     predictions = algorithm.predict(clf, X_test)
 
     #     scores = algorithm.evaluate_model(clf, cv)
     #     metrics = Metrics.Metrics(y_test, predictions)
@@ -60,6 +60,7 @@ def main():
 
     # visuals = Visualisations.Visualisations(scores_dict, cv)
     # visuals.boxplot()
+
 
 if __name__ == "__main__":
     sys.exit(main())
