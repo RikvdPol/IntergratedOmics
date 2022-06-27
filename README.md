@@ -1,5 +1,12 @@
 # A software to increase machine learning interpretability
 
+# Table of Contens
+1. [Description](https://github.com/RikvdPol/IntergratedOmics#Description)
+2. [Data](https://github.com/RikvdPol/IntergratedOmics#Data)
+3. [Usability](https://github.com/RikvdPol/IntergratedOmics#Usability)
+4. [Software](https://github.com/RikvdPol/IntergratedOmics#Software)
+5. [Visualisations](https://github.com/RikvdPol/IntergratedOmics#Visualisations)
+
 
 # Description
 
@@ -30,10 +37,14 @@ In addition, several modules were used in order for the code to gain proper func
 packages in python, and these will not be mentioned here. These packages are available in the supplementary materials
 in the project paper.
 
-| Package | Version | Usage                                                   |
-|---------|---------|---------------------------------------------------------|
-| sklearn | 1.0.2   | Used to implement several  machine learning algorithms. |
-| Numpy   | 1.21.5  | Uses for several calculations                           |
+| Package | Version | Usage                                                    |
+|---------|---------|----------------------------------------------------------|
+| sklearn | 1.0.2   | Used to implement several  machine learning algorithms.  |
+| Numpy   | 1.21.5  | Uses for several calculations                            |
+| Logging | 3.8.13  | Used to create logfile explaining events during code run |
+| shap    |         |                                                          |
+| xgboost |         |                                                          |
+
 
 # Visualisations
 
