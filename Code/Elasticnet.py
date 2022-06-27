@@ -30,7 +30,3 @@ class Elasticnet(Abstractalgorithm):
     #     )
     #     return clf
 
-    def train_model(self, clf, X_train, y_train):
-        elastic_model = clf.fit(X_train, y_train)
-        return elastic_model
-

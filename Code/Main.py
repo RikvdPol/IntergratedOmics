@@ -52,14 +52,14 @@ def main():
         clf = algorithm.train_model(clf, X_train, y_train)
         shap = Shapley.Shap(X_train, clf)
         shap.shap_test()
-    #     predictions = algorithm.predict(clf, X_test)
+        predictions = algorithm.predict(clf, X_test)
 
-    #     scores = algorithm.evaluate_model(clf, cv)
-    #     metrics = Metrics.Metrics(y_test, predictions)
-    #     scores_dict[model] = scores
+        scores = algorithm.evaluate_model(clf, cv)
+        metrics = Metrics.Metrics(y_test, predictions)
+        scores_dict[model] = scores
 
-    # visuals = Visualisations.Visualisations(scores_dict, cv)
-    # visuals.boxplot()
+    visuals = Visualisations.Visualisations(scores_dict, cv)
+    visuals.boxplot()
 
 
 if __name__ == "__main__":

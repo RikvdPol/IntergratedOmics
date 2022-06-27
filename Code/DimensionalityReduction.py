@@ -4,6 +4,11 @@ from sklearn.decomposition import PCA
 import matplotlib.pyplot as plt
 from pca import pca
 
+__author__ = "Rik van de Pol"
+__license__ = "MIT"
+__email__ = "rikvdpol93@gmail.com"
+__status__ = "Version 1.0"
+
 
 class DimensionalityReduction:
     def __init__(self, X, y):

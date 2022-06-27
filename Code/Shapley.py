@@ -41,18 +41,15 @@ class Shap():
         print("## Contributing features to diviate from the base value")
         print("Features in red contribute to a higher prediction")
         print("Features in blue contribute to a lower prediction")
-        # fig1 = shap.force_plot(explainer.expected_value, shap_values[0, :], X_sampled.iloc[0, :], matplotlib=True, show=False)
+        shap.force_plot(explainer.expected_value, shap_values[0, :], X_sampled.iloc[0, :], matplotlib=True, show=False)
 
         print("\n## Contributing effect of a single feature vs the model output")
         print("Shap values represents a feature's responsability for a change in a selected output")
         print("Vertical dispersion represents the interaction vs the other features")
-        # shap.force_plot(explainer.expected_value, shap_values, self.X_train, matplotlib=True)
 
         print("\n## Mean absolute contribution for each feature")
-        # fig2 = summary_plot(shap_values, X_sampled, show=False, plot_size=None)
 
         print("\n## Mean absolute contribution for each feature")
-        # fig3 = summary_plot(shap_values, X_sampled, plot_type="bar", show=False, plot_size=None)
 
 
         plt.figure(figsize=(10,5))
