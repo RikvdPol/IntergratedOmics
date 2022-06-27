@@ -1,11 +1,11 @@
 # A software to increase machine learning interpretability
 
 # Table of Contens
-1. [Description](https://github.com/RikvdPol/IntergratedOmics#Description)
-2. [Data](https://github.com/RikvdPol/IntergratedOmics#Data)
-3. [Usability](https://github.com/RikvdPol/IntergratedOmics#Usability)
-4. [Software](https://github.com/RikvdPol/IntergratedOmics#Software)
-5. [Visualisations](https://github.com/RikvdPol/IntergratedOmics#Visualisations)
+1. [Description](#Description)
+2. [Data](#Data)
+3. [Usability](#Usability)
+4. [Software](#Software)
+5. [Visualisations](#Visualisations)
 
 
 # Description
