@@ -31,7 +31,7 @@ The LifeLines-DEEP meta genomics sequencing data are freely available online.
 
 # Usability
 
-<img src="Visualisations/Usage.gif" alt="dashboardGIF" height="100" width="100%">
+<img src="Visualisations/Usage.gif" alt="pipelineGIF" height="100" width="100%">
 
 
 # Software Requirements
@@ -72,7 +72,8 @@ pip
 
 
 # Visualisations
-
+The pipeline produces several plots aimed to increase the interpretability of machine learning algorithms.
+Some plots will be shows here and their meanings will be shortly discussed.
 
 ![Diversity Plot](Visualisations/DiversityPlot.png)
 
