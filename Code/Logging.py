@@ -8,10 +8,17 @@ __status__ = "Version 1.0"
 
 
 class Logging:
+    """
+    Allows for logging. Using this class in each module, it becomes possible to log the events happening during
+    the run of the pipeline.
+    """
     def __int__(self):
         pass
 
     def create_logs(self, classname, msg):
+        """
+        Creates the logiles of each module in the Logfiles folder.
+        """
         path = Path(f"Logfiles/{classname}.log")
         print(msg)
         logging.basicConfig(filename=path,
