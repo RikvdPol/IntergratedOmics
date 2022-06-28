@@ -77,6 +77,9 @@ pip
 The pipeline produces several plots aimed to increase the interpretability of machine learning algorithms.
 Some plots will be shows here and their meanings will be shortly discussed.
 
+
+The first plot that will be constructed is called a diversity plot. The diversity plot shows the relative abundance of each group.
+
 ![Diversity Plot](Visualisations/DiversityPlot.png)
 
 
@@ -86,7 +89,9 @@ The screeplot shows how many principal components explain which percentage of th
 
 
 
+The final figure that is created contains the summary plots of the shap module. The y-axis of the figure on the left contains the variable name in order of importance from top to bottom. The x-axis contains the SHAP value. It indicates the change in log-odds, from which the probability of success can be extracted. Each dot represents a single observation in the data. The colour represents the original value.
 
+The right figure ....
 ![Shapely Plots](Visualisations/ShapelyPlots.png)
 
 
