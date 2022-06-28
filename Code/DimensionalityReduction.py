@@ -59,7 +59,7 @@ class DimensionalityReduction:
         """
         logs = Logging.Logging()
         try:
-            model.biplot(n_feat=3, legend=False, figsize=(10, 8), label=False, alpha_transparency=0.4)
+            model.biplot(n_feat=3, legend=False, figsize=(10, 8), label=False, alpha_transparency=0.15, cmap="Reds")
             msg = (f"Biplot successfully created")
             logs.create_logs(self.__class__.__name__, msg)
         except BaseException as e:
