@@ -1,16 +1,21 @@
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import make_scorer, mean_absolute_error
 import numpy as np
-import sys
-import os
-import Logging
+
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
 __email__ = "rikvdpol93@gmail.com"
 __status__ = "Version 1.0"
 
+
 class AlgorithmBaseClass:
+    """
+    Forms the base class for all algorithms. All algorithms have very similar functionality. Therefore, the base class
+    has been constructed. The algorithm inherits this class and only the define_algorithm method needs to be changed.
+    In the future, new algorithms can be added by simply inheriting this class and defining a new method in the
+    define_model method of the newly created algorithm class.
+    """
     def __init__(self, file, labelname):
         self.file = file
         self.labelname = labelname
@@ -51,6 +56,10 @@ class AlgorithmBaseClass:
         return scores
 
     def define_model(self, alpha=1.0, n_splits=10, n_repeats=3, random_state=None):
+        """
+        Define a machine learning algorithm. Only this method needs to be changed in the algorithm class provided
+        it inherits this class.
+        """
         pass
 
     def train_model(self, clf, X_train, y_train):
