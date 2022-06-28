@@ -10,6 +10,8 @@
 
 
 # Description
+The advent of  machine  learning has unlocked various novel  possibilities  in  various scientific  disciplines  and society.  This has  however  lead  to the  development  of increasingly complex machine learning algorithmswith higher accuracy,butconsequentially resulted ina lack of understanding the computational processesthat are at play.  This phenomenonhampers  the  incorporation  of machine  learninginto  research  and  societyand could prevent further  advances  in  many  disciplines.SHAP (shapley  additive  explanations)  is  a  novel  machine learning  algorithm  that supposedly  increases  machine learning interpretabilityand could potentially tackle this issue.This study developed a pipeline which allows the evaluation  of common complex  machine  learning approaches   (e.g.   XGboost,   Gradient   boosing   and Elasticnet) by   SHAPin  an   attempt   to   tackle   this problem. Gut microbiome omics data was the focus of the pipeline,   which enables   the   user   to   opt   for specialized   microbiome   omics   data preprocessing options. The  initial  aim  of  this  study  was  to  evaluate whether the  developed  pipeline  would indeed increase machine learning interpretability through a stakeholder questionnaire.This  has  however  not  been  conducted due to time constraints. Additional features need to be implemented   (e.g.   benchmarking,   classification, an improved   user-interface) shouldthe   softwarebe presented to stakeholders. Further studies are advised tofollow-up on theseshortcomings
+
 
 
 
@@ -41,20 +43,20 @@ In addition, several modules were used in order for the code to gain proper func
 packages in python, and these will not be mentioned here. These packages are available in the supplementary materials
 in the project paper.
 
-| Package           | Version | Usage                                                         |
-|-------------------|---------|---------------------------------------------------------------|
-| sklearn           | 1.0.2   | Used to implement several  machine learning algorithms.       |
-| Numpy             | 1.21.5  | Uses for several calculations                                 |
-| shap              | 0.39.0  | Used to calculate and visualise shapely values                |
-| xgboost           | 1.5.0   | Used to perform the xgboost algorithm on the data             |            
-| pandas            | 1.4.2   | Used to read data in the Preprocess module                    |
-| re                | 2.2.1   | Used to drop specific columns in the Preprocess module        |
-| IPYthon           | 8.3.0   | Used for it's display function                                |
-| pca               | 1.8.2   | Used to perform pca and construct the scree and bi plot       |
-| pathlib           | 2.3.6   | Used to write constructed plots to file given a specific path |
-| composition_stats | 1.40-1  | Used for many functions in the Preprocess module              |
-| matplotlib        | 3.5.1   | Used to create a variety of plots                             |
-| pickle            | 4.0     | Used to read the pickled data                                 |
+| Package                                                                       | Version | Usage                                                         |
+|-------------------------------------------------------------------------------|---------|---------------------------------------------------------------|
+| [sklearn](https://scikit-learn.org/stable/supervised_learning.html)           | 1.0.2   | Used to implement several  machine learning algorithms.       |
+| [Numpy](https://numpy.org/)                                                   | 1.21.5  | Uses for several calculations                                 |
+| [shap](https://shap.readthedocs.io/en/latest/index.html)                      | 0.39.0  | Used to calculate and visualise shapely values                |
+| [xgboost](https://xgboost.readthedocs.io/en/stable/)                          | 1.5.0   | Used to perform the xgboost algorithm on the data             |
+| [pandas](https://pandas.pydata.org/docs/)                                     | 1.4.2   | Used to read data in the Preprocess module                    |
+| [re](https://docs.python.org/3/library/re.html)                               | 2.2.1   | Used to drop specific columns in the Preprocess module        |
+| [IPython](https://pypi.org/project/ipython/)                                  | 8.3.0   | Used for it's display function                                |
+| [pca](https://pypi.org/project/pca/)                                          | 1.8.2   | Used to perform pca and construct the scree and bi plot       |
+| [pathlib](https://docs.python.org/3/library/pathlib.html)                     | 2.3.6   | Used to write constructed plots to file given a specific path |
+| [composition_stats](https://pypi.org/project/composition-stats/)              | 1.40-1  | Used for many functions in the Preprocess module              |
+| [matplotlib](https://matplotlib.org/)                                         | 3.5.1   | Used to create a variety of plots                             |
+| [pickle](https://docs.python.org/3/library/pickle.html)                       | 4.0     | Used to read the pickled data                                 |
 
 
 ## Installation
@@ -94,6 +96,8 @@ to answer our questions. It will help us improve the pipeline in the future. The
 [here](https://docs.google.com/forms/d/e/1FAIpQLSc_e2J3mxyiqu-RCSdUfX8M3nImsFRcippZnV-pZy27q75qNQ/viewform).
 
 # Acknowledgements
+We would like to thank ....
+
 
 # License
 The project contains a MIT [license](LICENSE)
