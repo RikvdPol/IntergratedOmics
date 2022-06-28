@@ -1,23 +1,9 @@
 "Author: Hicham Jemil"
 
-# import numpy as np
-# import pandas as pd
-# import matplotlib.pyplot as plt
-# import seaborn as sns
-# from collections import defaultdict
-# from sklearn import model_selection, ensemble
-# from sklearn.metrics import mean_squared_error
-# from sklearn.linear_model import LinearRegression
-# from sklearn.neighbors import KNeighborsClassifier
-# from sklearn.model_selection import KFold, cross_val_score, train_test_split
-# from sklearn.base import BaseEstimator, TransformerMixin, RegressorMixin, clone
-
 import matplotlib.pyplot as plt
 import shap
-from IPython.display import display
 from shap import maskers
 from shap import summary_plot
-from sklearn.linear_model import ElasticNet
 
 
 class Shap():

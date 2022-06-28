@@ -1,6 +1,5 @@
 from sklearn.metrics import mean_squared_error,r2_score,mean_absolute_error
 import numpy as np
-import Logging
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"

@@ -1,7 +1,3 @@
-import pandas as pd
-import numpy as np
-from sklearn.decomposition import PCA
-import matplotlib.pyplot as plt
 from pca import pca
 import Logging
 import sys

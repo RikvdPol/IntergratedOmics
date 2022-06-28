@@ -1,8 +1,6 @@
 "Author Hicham Jemil"
 
-import pandas as pd
-import sys
-import os
+
 import re
 from composition_stats import multiplicative_replacement
 from composition_stats import ilr

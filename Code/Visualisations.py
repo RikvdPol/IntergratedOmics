@@ -1,6 +1,5 @@
 import matplotlib.pyplot as plt
 import Logging
-# import plotly.express as px
 import sys
 
 __author__ = "Rik van de Pol"
