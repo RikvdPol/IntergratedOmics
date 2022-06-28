@@ -1,5 +1,5 @@
 '''gradient boosting algorithm'''
-from sklearn.model_selection import train_test_split, cross_val_score, RepeatedKFold
+from sklearn.model_selection import RepeatedKFold
 from sklearn.ensemble import GradientBoostingRegressor
 from Abstractalgorithm import Abstractalgorithm
 

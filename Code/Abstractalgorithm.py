@@ -1,9 +1,6 @@
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import make_scorer, mean_absolute_error
 import numpy as np
-import sys
-import os
-import Logging
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"

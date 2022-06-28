@@ -1,7 +1,6 @@
-from sklearn.model_selection import RepeatedKFold, GridSearchCV
+from sklearn.model_selection import RepeatedKFold
 from sklearn.linear_model import ElasticNet
 from Abstractalgorithm import Abstractalgorithm
-import numpy as np
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"

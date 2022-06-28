@@ -41,13 +41,20 @@ In addition, several modules were used in order for the code to gain proper func
 packages in python, and these will not be mentioned here. These packages are available in the supplementary materials
 in the project paper.
 
-| Package | Version | Usage                                                    |
-|---------|---------|----------------------------------------------------------|
-| sklearn | 1.0.2   | Used to implement several  machine learning algorithms.  |
-| Numpy   | 1.21.5  | Uses for several calculations                            |
-| Logging | 3.8.13  | Used to create logfile explaining events during code run |
-| shap    |         |                                                          |
-| xgboost |         |                                                          |
+| Package           | Version | Usage                                                    |
+|-------------------|---------|----------------------------------------------------------|
+| sklearn           | 1.0.2   | Used to implement several  machine learning algorithms.  |
+| Numpy             | 1.21.5  | Uses for several calculations                            |
+| shap              | 0.39.0  |                                                          |
+| xgboost           | 1.5.0   |                                                          |            
+| pandas            | 1.4.2   |                                                          |
+| re                | 2.2.1   |                                                          |
+| IPYthon           | 8.3.0   |                                                          |
+| pca               | 1.8.2   |                                                          |
+| pathlib           | 2.3.6   |                                                          |
+| composition_stats | 1.40-1  |                                                          |
+| matplotlib        | 3.5.1   |                                                          |
+| pickle            | 4.0     |                                                          |
 
 
 # Installations
