@@ -100,6 +100,13 @@ We have created a questionnaire to help us further improve this pipeline. After 
 to answer our questions. It will help us improve the pipeline in the future. The questionnaire can be found
 [here](https://docs.google.com/forms/d/e/1FAIpQLSc_e2J3mxyiqu-RCSdUfX8M3nImsFRcippZnV-pZy27q75qNQ/viewform).
 
+
+# Overview
+
+The flowchart below depicts a schematic overview of the created pipeline.
+![pipeline](Visualisations/Flowchart.png)
+
+
 # Acknowledgements
 We would like to thank ....
 
