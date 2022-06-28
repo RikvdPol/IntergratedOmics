@@ -13,7 +13,7 @@
 
 
 
-# Data
+## Data
 Data has been collected and anonymized by the researchers at the UMCG. 
 
 Data used in this project comes from already published studies and therefore data has been collected and has been made publicly available. Datasets used in this project are the following: 
@@ -34,7 +34,7 @@ The LifeLines-DEEP meta genomics sequencing data are freely available online.
 <img src="Visualisations/Usage.gif" alt="dashboardGIF" height="100" width="100%">
 
 
-# Software
+# Software Requirements
 
 All of the code was written in [python 3.8.13](https://www.python.org/downloads/release/python-3813/).
 In addition, several modules were used in order for the code to gain proper functionality. Some packages are default 
@@ -57,7 +57,7 @@ in the project paper.
 | pickle            | 4.0     |                                                          |
 
 
-# Installations
+## Installation
 Install the packages with either conda or pip.
 
 conda:
@@ -85,3 +85,8 @@ pip
 We have created a questionnaire to help us further improve this pipeline. After using it, please don't hesitate 
 to answer our questions. It will help us improve the pipeline in the future. The questionnaire can be found
 [here](https://docs.google.com/forms/d/e/1FAIpQLSc_e2J3mxyiqu-RCSdUfX8M3nImsFRcippZnV-pZy27q75qNQ/viewform).
+
+# Acknowledgements
+
+# License
+The project contains a MIT [license](LICENSE)
