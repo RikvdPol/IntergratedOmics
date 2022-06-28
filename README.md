@@ -41,20 +41,20 @@ In addition, several modules were used in order for the code to gain proper func
 packages in python, and these will not be mentioned here. These packages are available in the supplementary materials
 in the project paper.
 
-| Package           | Version | Usage                                                    |
-|-------------------|---------|----------------------------------------------------------|
-| sklearn           | 1.0.2   | Used to implement several  machine learning algorithms.  |
-| Numpy             | 1.21.5  | Uses for several calculations                            |
-| shap              | 0.39.0  |                                                          |
-| xgboost           | 1.5.0   |                                                          |            
-| pandas            | 1.4.2   |                                                          |
-| re                | 2.2.1   |                                                          |
-| IPYthon           | 8.3.0   |                                                          |
-| pca               | 1.8.2   |                                                          |
-| pathlib           | 2.3.6   |                                                          |
-| composition_stats | 1.40-1  |                                                          |
-| matplotlib        | 3.5.1   |                                                          |
-| pickle            | 4.0     |                                                          |
+| Package           | Version | Usage                                                         |
+|-------------------|---------|---------------------------------------------------------------|
+| sklearn           | 1.0.2   | Used to implement several  machine learning algorithms.       |
+| Numpy             | 1.21.5  | Uses for several calculations                                 |
+| shap              | 0.39.0  | Used to calculate and visualise shapely values                |
+| xgboost           | 1.5.0   | Used to perform the xgboost algorithm on the data             |            
+| pandas            | 1.4.2   | Used to read data in the Preprocess module                    |
+| re                | 2.2.1   | Used to drop specific columns in the Preprocess module        |
+| IPYthon           | 8.3.0   | Used for it's display function                                |
+| pca               | 1.8.2   | Used to perform pca and construct the scree and bi plot       |
+| pathlib           | 2.3.6   | Used to write constructed plots to file given a specific path |
+| composition_stats | 1.40-1  | Used for many functions in the Preprocess module              |
+| matplotlib        | 3.5.1   | Used to create a variety of plots                             |
+| pickle            | 4.0     | Used to read the pickled data                                 |
 
 
 ## Installation
@@ -77,7 +77,13 @@ Some plots will be shows here and their meanings will be shortly discussed.
 
 ![Diversity Plot](Visualisations/DiversityPlot.png)
 
+
+The screeplot shows how many principal components explain which percentage of the variance in the data. In the case of the figure below, the first principal component explains approximately 50% of the variance in the data. The black line shows the cummulative explained variance per principal component. Furthermore, after seven components, nearly all the variance in the data has already been explained.
+
 ![Screeplot](Visualisations/Screeplot.png)
+
+
+
 
 ![Shapely Plots](Visualisations/ShapelyPlots.png)
 
