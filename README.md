@@ -101,6 +101,10 @@ We have created a questionnaire to help us further improve this pipeline. After 
 to answer our questions. It will help us improve the pipeline in the future. The questionnaire can be found
 [here](https://docs.google.com/forms/d/e/1FAIpQLSc_e2J3mxyiqu-RCSdUfX8M3nImsFRcippZnV-pZy27q75qNQ/viewform).
 
+In order to improve the pipeline hyperparameter tuning can be performed. This would be a method that needs to be added to each algorithm module,
+and not the AlgorithmBaseClass because the hyperparameters differ for each algorithm. Tuning hyperparameters will greatly increase the runtime of the pipeline,
+however it will likely increase accuracy as well.
+
 
 # Overview
 
