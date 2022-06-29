@@ -10,21 +10,8 @@ import Shapley
 
 
 def main():
-
-
-    # The Preprocess module requests a datafile. THis is for now only in a pickle extension. Run this snippet to store the combined dataset in a pickle format:
-    # df_ID = pd.read_csv('../Data/Covariates.csv', index_col=0, sep="\t")   # Example file is used
-    # df_micro = pd.read_csv('../Data/MetaPhlan3.csv', index_col=0, sep="\t")
-    # df_test = pd.concat([df_ID, df_micro], axis=1)
-    # df_test.drop("X1172", axis=1, inplace=True)
-    # df_test.dropna(inplace=True)
-    # df_test.to_pickle("microbiome_df.pkl")
-
-
     ## Snippet to run from Preprocess till advice:
-    end_data, target, features, df_bins = Preprocess.script_preprocessing()   # Use microbiome_df.pkl as file
-    #Target contains the label column, features contain the data
-    # print(features)
+    end_data, target, features, df_bins = Preprocess.script_preprocessing()
     end_result = Advice.script_recommendation(end_data, features)
 
     scores_dict = {}
@@ -46,14 +33,14 @@ def main():
         clf = algorithm.train_model(clf, X_train, y_train)
         shap = Shapley.Shap(X_train, clf)
         shap.shap_test()
-        predictions = algorithm.predict(clf, X_test)
+        # predictions = algorithm.predict(clf, X_test)
 
-        scores = algorithm.evaluate_model(clf, cv)
-        metrics = Metrics.Metrics(y_test, predictions)
-        scores_dict[model] = scores
+        # scores = algorithm.evaluate_model(clf, cv)
+        # metrics = Metrics.Metrics(y_test, predictions)
+        # scores_dict[model] = scores
 
-    visuals = Visualisations.Visualisations(scores_dict, cv)
-    visuals.boxplot()
+    # visuals = Visualisations.Visualisations(scores_dict, cv)
+    # visuals.boxplot()
 
 
 if __name__ == "__main__":

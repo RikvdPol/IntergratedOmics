@@ -1,7 +1,8 @@
 from sklearn.model_selection import train_test_split, cross_val_score
 from sklearn.metrics import make_scorer, mean_absolute_error
 import numpy as np
-
+import Logging
+import sys
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
@@ -31,20 +32,41 @@ class AlgorithmBaseClass:
         This is random because is should not matter to the model which data it gets, it should always be comparable
         to previous instances.
         """
-        X_train, X_test, y_train, y_test = train_test_split(self.file,
-                                                            self.labelname,
-                                                            test_size=test_size,
-                                                            random_state=random_state)
+        logs = Logging.Logging()
+        try:
+            X_train, X_test, y_train, y_test = train_test_split(self.file,
+                                                                self.labelname,
+                                                                test_size=test_size,
+                                                                random_state=random_state)
 
-        return X_train, X_test, y_train, y_test
+            msg = f"Data succesfully split into training and test data"
+            logs.create_logs(self.__class__.__name__, msg)
+            return X_train, X_test, y_train, y_test
+    
+        except BaseException as e:
+            msg = f"{e}: splitting of data unsuccessful"
+            logs.create_logs(self.__class__.__name__, msg)
+            sys.exit(0)
+
+
 
     def predict(self, model, X_test):
         """
         Makes predictions on the test dataset by using the trained model.
         """
-        predictions = model.predict(X_test)
-        return predictions
-        
+        logs = Logging.Logging()
+        try:
+            predictions = model.predict(X_test)
+            msg = f"Predictions could not be made"
+            logs.create_logs(self.__class__.__name__, msg)
+            return predictions
+
+        except BaseException as e:
+            msg = f"{e}: Could not make predictions"
+            logs.create_logs(self.__class__.__name__, msg)
+            sys.exit(0)
+
+            
 
     def evaluate_model(self, model, cv):
         """

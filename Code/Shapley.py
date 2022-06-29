@@ -38,7 +38,7 @@ class Shap():
         print("\n## Mean absolute contribution for each feature")
 
 
-        plt.figure(figsize=(10,5))
+        plt.figure(figsize=(25,30))
         plt.subplot(1,2,1)
         summary_plot(shap_values, X_sampled, show=False, plot_size=None)
         plt.subplot(1,2,2)
