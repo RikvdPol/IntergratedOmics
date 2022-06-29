@@ -1,4 +1,5 @@
 import logging
+import os
 from pathlib import Path
 
 __author__ = "Rik van de Pol"
@@ -19,6 +20,9 @@ class Logging:
         """
         Creates the logiles of each module in the Logfiles folder.
         """
+        if not os.path.exists(f'Logfiles'):
+            os.makedirs(f'Logfiles')
+
         path = Path(f"Logfiles/{classname}.log")
         print(msg)
         logging.basicConfig(filename=path,
