@@ -24,7 +24,7 @@ Data used in this project comes from already published studies and therefore dat
 
 - Metabolomics: blood metabolites measured using targeted metabolomics.  
 
-- Proteomics: https://www.olink.com  
+- [Proteomics](https://www.olink.com)  
 
 The gut microbiome data is collected by deep sequencing the gut micro biomes of 1135 Dutch participants, gathered from 1179 stool samples from lifelines-DEEP participants. The gut microbiome was analysed using a HiSeq2000, conducting a paired-end metagenomic shotgun sequencing (MGS). 
 Using MetaPhlAn 2.0 , the microbiome sequence reads were mapped to ~1 million microbial-taxonomy- specific marker genes. The main goal of the data is to find correlations between dietary intake and diseases. In addition, metabolomics, proteomics and some anthropometric data has been gathered.
@@ -113,7 +113,8 @@ The flowchart below depicts a schematic overview of the created pipeline.
 
 
 # Acknowledgements
-We would like to thank ....
+We would like to thank Dr. A. Vich Vila and S. Andreu Sanchez, MSc for their guidance during the course of the project. We would like
+to thank the UMCG for providing us with this project.
 
 
 # License
