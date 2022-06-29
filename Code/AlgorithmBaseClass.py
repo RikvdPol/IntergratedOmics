@@ -19,9 +19,8 @@ class AlgorithmBaseClass:
     def __init__(self, file, labelname):
         self.file = file
         self.labelname = labelname
-        self.labels = None
 
-    def split_data(self, test_size=0.3, random_state=None):
+    def split_data(self, test_size=0.3, random_state=42):
         """
         Split the data intro training and test data, and the labels intro training and test labels.
         The split is decided by the percentage of data to be used for testing, provided by a number between
@@ -33,7 +32,7 @@ class AlgorithmBaseClass:
         to previous instances.
         """
         X_train, X_test, y_train, y_test = train_test_split(self.file,
-                                                            self.labels,
+                                                            self.labelname,
                                                             test_size=test_size,
                                                             random_state=random_state)
 
@@ -45,13 +44,14 @@ class AlgorithmBaseClass:
         """
         predictions = model.predict(X_test)
         return predictions
+        
 
     def evaluate_model(self, model, cv):
         """
         Evaluate the model using the cross_val_score function. The model is evaluated several times and the results of the
         cost function are saved. This will later be used for the plotting of the boxplots.
         """
-        scores = cross_val_score(model, self.file, self.labels, scoring=make_scorer(mean_absolute_error), cv=cv, n_jobs=-1)
+        scores = cross_val_score(model, self.file, self.labelname, scoring=make_scorer(mean_absolute_error), cv=cv, n_jobs=-1)
         scores = np.absolute(scores)
         return scores
 
