@@ -26,6 +26,7 @@ class Preprocessing():
         "and checks whether the sorted dataset is correct"
         while True:
             self.dataset = pd.DataFrame(self.dataset)
+            self.dataset = self.dataset.dropna()
             print("Your input dataset\n")
             display(self.dataset)
             request_target = str(input("Please provide the exact target columnname.\nYour input:"))
