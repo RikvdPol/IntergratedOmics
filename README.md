@@ -33,7 +33,7 @@ The LifeLines-DEEP meta genomics sequencing data are freely available online.
 
 # Usability
 
-<img src="Visualisations/Usage.gif" alt="pipelineGIF" height="100" width="100%">
+<img src="Visualisations/Usage.gif" alt="pipelineGIF" height="300" width="100%">
 
 
 # Software Requirements
