@@ -13,8 +13,8 @@ class DimensionalityReduction:
     Perform Principal Component Analysis on the provided data. Plots the scree and biplot. The loadings
     and principal components can be gathered by using their respective get functions.
     """
-    def __init__(self, X, y):
-        self.X = X
+    def __init__(self, x, y):
+        self.x = x
         self.y = y
         self.results = None
 
@@ -25,15 +25,14 @@ class DimensionalityReduction:
         logs = Logging.Logging()
         try:
             model = pca(n_components=components, normalize=True)
-            self.results = model.fit_transform(self.X)
-            msg = (f"PCA succesfully performed")
+            self.results = model.fit_transform(self.x)
+            msg = f"PCA succesfully performed"
             logs.create_logs(self.__class__.__name__, msg)
             return model
         except BaseException as e:
-            msg = (f"Principal Component Analysis could not be performed because of error {e}")
+            msg = f"Principal Component Analysis could not be performed because of error {e}"
             logs.create_logs(self.__class__.__name__, msg)
             sys.exit(0)
-
 
     def construct_scree_plot(self, model):
         """
@@ -43,13 +42,12 @@ class DimensionalityReduction:
         logs = Logging.Logging()
         try:
             model.plot(figsize=(10, 8))
-            msg = (f"Scree plot successfully created")
+            msg = f"Scree plot successfully created"
             logs.create_logs(self.__class__.__name__, msg)
         except BaseException as e:
-            msg = (f"Scree plot could be created because of error {e}")
+            msg = f"Scree plot could be created because of error {e}"
             logs.create_logs(self.__class__.__name__, msg)
             sys.exit(0)
-            
 
     def construct_bi_plot(self, model):
         """
@@ -60,10 +58,10 @@ class DimensionalityReduction:
         logs = Logging.Logging()
         try:
             model.biplot(n_feat=3, legend=False, figsize=(10, 8), label=False, alpha_transparency=0.15, cmap="Reds")
-            msg = (f"Biplot successfully created")
+            msg = f"Biplot successfully created"
             logs.create_logs(self.__class__.__name__, msg)
         except BaseException as e:
-            msg = (f"Biplot could be created because of error {e}")
+            msg = f"Biplot could be created because of error {e}"
             logs.create_logs(self.__class__.__name__, msg)
             sys.exit(0)
 

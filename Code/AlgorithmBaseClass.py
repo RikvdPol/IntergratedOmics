@@ -34,29 +34,27 @@ class AlgorithmBaseClass:
         """
         logs = Logging.Logging()
         try:
-            X_train, X_test, y_train, y_test = train_test_split(self.file,
+            x_train, x_test, y_train, y_test = train_test_split(self.file,
                                                                 self.labelname,
                                                                 test_size=test_size,
                                                                 random_state=random_state)
 
             msg = f"Data succesfully split into training and test data"
             logs.create_logs(self.__class__.__name__, msg)
-            return X_train, X_test, y_train, y_test
+            return x_train, x_test, y_train, y_test
     
         except BaseException as e:
             msg = f"{e}: splitting of data unsuccessful"
             logs.create_logs(self.__class__.__name__, msg)
             sys.exit(0)
 
-
-
-    def predict(self, model, X_test):
+    def predict(self, model, x_test):
         """
         Makes predictions on the test dataset by using the trained model.
         """
         logs = Logging.Logging()
         try:
-            predictions = model.predict(X_test)
+            predictions = model.predict(x_test)
             msg = f"Predictions could not be made"
             logs.create_logs(self.__class__.__name__, msg)
             return predictions
@@ -65,8 +63,6 @@ class AlgorithmBaseClass:
             msg = f"{e}: Could not make predictions"
             logs.create_logs(self.__class__.__name__, msg)
             sys.exit(0)
-
-            
 
     def evaluate_model(self, model, cv):
         """
@@ -84,11 +80,11 @@ class AlgorithmBaseClass:
         """
         pass
 
-    def train_model(self, clf, X_train, y_train):
+    def train_model(self, clf, x_train, y_train):
         """
         Train the previously defined model by providing it with training data and the corresponding labels.
         """
-        model = clf.fit(X_train, y_train)
+        model = clf.fit(x_train, y_train)
         return model
 
 
