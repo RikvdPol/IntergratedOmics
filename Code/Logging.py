@@ -13,8 +13,6 @@ class Logging:
     Allows for logging. Using this class in each module, it becomes possible to log the events happening during
     the run of the pipeline.
     """
-    def __int__(self):
-        pass
 
     def create_logs(self, classname, msg):
         """
@@ -24,7 +22,6 @@ class Logging:
             os.makedirs(f'Logfiles')
 
         path = Path(f"Logfiles/{classname}.log")
-        print(msg)
         logging.basicConfig(filename=path,
                             filemode='a+',
                             format='%(asctime)s %(message)s',

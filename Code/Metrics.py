@@ -1,5 +1,6 @@
-from sklearn.metrics import mean_squared_error,r2_score,mean_absolute_error
+from sklearn.metrics import mean_squared_error, r2_score, mean_absolute_error
 import numpy as np
+import Logging
 
 __author__ = "Rik van de Pol"
 __license__ = "MIT"
@@ -23,9 +24,18 @@ class Metrics:
         So, if the R2 of a model is 0.50, then approximately half of the observed 
         variation can be explained by the models inputs.
         """
-        r2 = r2_score(self.y_test, self.predictions)
-        print(f"Model R2: {r2}")
-        return r2
+
+        logs = Logging.Logging()
+        try:
+            r2 = r2_score(self.y_test, self.predictions)
+            msg = f"Calculated model R2 value"
+            logs.create_logs(self.__class__.__name__, msg)
+            return r2
+
+        except BaseException as e:
+            msg = f"{e}: R2 value could not be calculated"
+            logs.create_logs(self.__class__.__name__, msg)
+
 
     def mean_squared_error(self):
         """
@@ -34,9 +44,17 @@ class Metrics:
         Returns a single value that represents model accuracy. The lower the mean squared
         error, the better the model performs.
         """
-        mse = mean_squared_error(self.y_test, self.predictions)
-        print(f"Model Mean Squared Error: {mse}")
-        return mse
+
+        logs = Logging.Logging()
+        try:
+            mse = mean_squared_error(self.y_test, self.predictions)
+            msg = f"Calculated model mse value"
+            logs.create_logs(self.__class__.__name__, msg)
+            return mse
+
+        except BaseException as e:
+            msg = f"{e}: mse value could not be calculated"
+            logs.create_logs(self.__class__.__name__, msg)
 
     def mean_absolute_error(self):
         """
@@ -45,9 +63,16 @@ class Metrics:
         calculates the mean. Returns a single value that represents model accuracy. The 
         lower the mean absolute error, the better the model performs.
         """
-        mae = mean_absolute_error(self.y_test, self.predictions)
-        print(f"Model Mean Absulute Error: {mae}")
-        return mae
+        logs = Logging.Logging()
+        try:
+            mae = mean_absolute_error(self.y_test, self.predictions)
+            msg = f"Calculated model mae value"
+            logs.create_logs(self.__class__.__name__, msg)
+            return mae
+
+        except BaseException as e:
+            msg = f"{e}: mse value could not be calculated"
+            logs.create_logs(self.__class__.__name__, msg)
 
     def root_mean_squared_error(self):
         """
@@ -55,20 +80,16 @@ class Metrics:
         It consists of only one additional step. In order to get rid of the squaring of the data, the result
         of the root of the mean squared error is used.
         """
-        rmse = np.sqrt(mean_squared_error(self.y_test, self.predictions))
-        print(f"Model Root Mean Squared Error: {rmse}")
-        return rmse
+        logs = Logging.Logging()
+        try:
+            rmse = np.sqrt(mean_squared_error(self.y_test, self.predictions))
+            msg = f"Calculated model rmse value"
+            logs.create_logs(self.__class__.__name__, msg)
+            return rmse
 
-    def repeatedKfold(self, model, cv):
-        """
-        scores = cross_val_score(model, self.file, self.labels, scoring='neg_mean_absolute_error', cv=cv, n_jobs=-1)
-        scores = np.absolute(scores)
-        return scores
-        """
+        except BaseException as e:
+            msg = f"{e}: mse value could not be calculated"
+            logs.create_logs(self.__class__.__name__, msg)
 
-    def get_scores(self):
-        r2 = self.r_squared()
-        mse = self.mean_squared_error()
-        mae = self.mean_absolute_error()
-        rmse = self.root_mean_squared_error()
-        return r2, mse, mae, rmse
+
+
