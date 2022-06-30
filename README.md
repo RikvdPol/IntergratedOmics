@@ -105,7 +105,10 @@ to answer our questions. It will help us improve the pipeline in the future. The
 
 In order to improve the pipeline hyperparameter tuning can be performed. This would be a method that needs to be added to each algorithm module,
 and not the AlgorithmBaseClass because the hyperparameters differ for each algorithm. Tuning hyperparameters will greatly increase the runtime of the pipeline,
-however it will likely increase accuracy as well.
+however it will likely increase accuracy as well. Furthermore, in many of the modules, when using logging the BaseException is used.
+This is an extremely broad statement and should usually be avoided. However, due to time constraints there was unfortunately 
+not much choice. When using a try except, the exception should be changed to the specific exception that is believed to be possible
+to occur.
 
 
 # Overview
@@ -113,6 +116,10 @@ however it will likely increase accuracy as well.
 The flowchart below depicts a schematic overview of the created pipeline.
 ![pipeline](Visualisations/Flowchart.png)
 
+The flowchart follows standard flowchart symbols.
+The yellow, cut-off, square indicates manual input by the user.
+The red square indicates a process performed by the pipeline.
+Finally, the green symbol simply indicates the pipeline displays something. In these cases a plot.
 
 # Acknowledgements
 We would like to thank Dr. A. Vich Vila and S. Andreu Sanchez, MSc for their guidance during the course of the project. We would like
