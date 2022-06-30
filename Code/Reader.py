@@ -24,10 +24,6 @@ class Reader:
         Log files are automatically created describing wether or not the file was succesfully read, with a
         message describing the error or success.
         """
-        sep = os.path.sep
-        if not os.path.exists(f'Logfiles'):
-            os.makedirs(f'Logfiles')
-
         logs = Logging.Logging()
         try:
             data = pd.read_csv(self.file, sep="\t", header=self.header)
