@@ -116,6 +116,10 @@ to occur.
 The flowchart below depicts a schematic overview of the created pipeline.
 ![pipeline](Visualisations/Flowchart.png)
 
+The flowchart follows standard flowchart symbols.
+The yellow, cut-off, square indicates manual input by the user.
+The red square indicates a process performed by the pipeline.
+Finally, the green symbol simply indicates the pipeline displays something. In these cases a plot.
 
 # Acknowledgements
 We would like to thank Dr. A. Vich Vila and S. Andreu Sanchez, MSc for their guidance during the course of the project. We would like
