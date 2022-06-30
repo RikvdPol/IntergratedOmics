@@ -1,46 +1,54 @@
-import Elasticnet
 import sys
-import Visualisations
-import Metrics
+import Elasticnet
 import xgboost_algorithm
+import Metrics
 import Preprocess
 import Advice
 import DimensionalityReduction
 import Shapley
+import Visualisations
+
+__author__ = "Rik van de Pol"
+__license__ = "MIT"
+__email__ = "rikvdpol93@gmail.com"
+__status__ = "Version 1.0"
 
 
 def main():
     ## Snippet to run from Preprocess till advice:
     end_data, target, features, df_bins = Preprocess.script_preprocessing()
     end_result = Advice.script_recommendation(end_data, features)
+    print("Ending:", end_result)
 
+    # Prepare the scores dictionary. Will later be used to store and plot the metric scores.
     scores_dict = {}
+
     models_dict = {'elasticnet': Elasticnet.Elasticnet, 'xgboost': xgboost_algorithm.XG}
 
-
-
+    # Perform principal component analysis
     reductions = DimensionalityReduction.DimensionalityReduction(end_data, target)
     mod = reductions.construction()
     reductions.construct_scree_plot(mod)
     reductions.construct_bi_plot(mod)
 
-
+    # Run the implemented algorithms and the SHAP module for each algorithm
     for model in models_dict:
-
         algorithm = models_dict[model](features, target)
-        X_train, X_test, y_train, y_test = algorithm.split_data()
+        x_train, x_test, y_train, y_test = algorithm.split_data()
         clf, cv = algorithm.define_model()
-        clf = algorithm.train_model(clf, X_train, y_train)
-        shap = Shapley.Shap(X_train, clf)
+        clf = algorithm.train_model(clf, x_train, y_train)
+        shap = Shapley.Shap(x_train, clf)
         shap.shap_test()
-        # predictions = algorithm.predict(clf, X_test)
+        predictions = algorithm.predict(clf, x_test)
 
-        # scores = algorithm.evaluate_model(clf, cv)
-        # metrics = Metrics.Metrics(y_test, predictions)
-        # scores_dict[model] = scores
+        scores = algorithm.evaluate_model(clf, cv)
+        metrics = Metrics.Metrics(y_test, predictions)
+        mse = metrics.mean_squared_error()
+        print(model + " Mean Squared Error:", mse)
+        scores_dict[model] = scores
 
-    # visuals = Visualisations.Visualisations(scores_dict, cv)
-    # visuals.boxplot()
+    visuals = Visualisations.Visualisations(scores_dict, cv)
+    visuals.boxplot()
 
 
 if __name__ == "__main__":
