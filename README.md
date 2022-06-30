@@ -53,6 +53,7 @@ in the project paper.
 | [re](https://docs.python.org/3/library/re.html)                     | 2.2.1   | Used to drop specific columns in the Preprocess module        |
 | [IPython](https://pypi.org/project/ipython/)                        | 8.3.0   | Used for it's display function                                |
 | [pca](https://pypi.org/project/pca/)                                | 1.8.2   | Used to perform pca and construct the scree and bi plot       |
+| [pathlib](https://docs.python.org/3/library/pathlib.html)           | 2.3.6   | Used to write constructed plots to file given a specific path |
 | [composition_stats](https://pypi.org/project/composition-stats/)    | 1.40-1  | Used for many functions in the Preprocess module              |
 | [matplotlib](https://matplotlib.org/)                               | 3.5.1   | Used to create a variety of plots                             |
 | [pickle](https://docs.python.org/3/library/pickle.html)             | 4.0     | Used to read the pickled data                                 |
