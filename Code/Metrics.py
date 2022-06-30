@@ -9,6 +9,12 @@ __status__ = "Version 1.0"
 
 
 class Metrics:
+    """
+    Perform different kinds of metrics used to identify the accuracy of a machine learning algorithm.
+    parameters:
+        y_test: Array of true labels
+        predictions: Array of labels predicted by the machine learning model
+    """
     def __init__(self, y_test, predictions):
         self.y_test = y_test
         self.predictions = predictions
@@ -35,7 +41,6 @@ class Metrics:
         except BaseException as e:
             msg = f"{e}: R2 value could not be calculated"
             logs.create_logs(self.__class__.__name__, msg)
-
 
     def mean_squared_error(self):
         """
