@@ -43,20 +43,21 @@ In addition, several modules were used in order for the code to gain proper func
 packages in python, and these will not be mentioned here. These packages are available in the supplementary materials
 in the project paper.
 
-| Package                                                                       | Version | Usage                                                         |
-|-------------------------------------------------------------------------------|---------|---------------------------------------------------------------|
-| [sklearn](https://scikit-learn.org/stable/supervised_learning.html)           | 1.0.2   | Used to implement several  machine learning algorithms.       |
-| [Numpy](https://numpy.org/)                                                   | 1.21.5  | Uses for several calculations                                 |
-| [shap](https://shap.readthedocs.io/en/latest/index.html)                      | 0.39.0  | Used to calculate and visualise shapely values                |
-| [xgboost](https://xgboost.readthedocs.io/en/stable/)                          | 1.5.0   | Used to perform the xgboost algorithm on the data             |
-| [pandas](https://pandas.pydata.org/docs/)                                     | 1.4.2   | Used to read data in the Preprocess module                    |
-| [re](https://docs.python.org/3/library/re.html)                               | 2.2.1   | Used to drop specific columns in the Preprocess module        |
-| [IPython](https://pypi.org/project/ipython/)                                  | 8.3.0   | Used for it's display function                                |
-| [pca](https://pypi.org/project/pca/)                                          | 1.8.2   | Used to perform pca and construct the scree and bi plot       |
-| [pathlib](https://docs.python.org/3/library/pathlib.html)                     | 2.3.6   | Used to write constructed plots to file given a specific path |
-| [composition_stats](https://pypi.org/project/composition-stats/)              | 1.40-1  | Used for many functions in the Preprocess module              |
-| [matplotlib](https://matplotlib.org/)                                         | 3.5.1   | Used to create a variety of plots                             |
-| [pickle](https://docs.python.org/3/library/pickle.html)                       | 4.0     | Used to read the pickled data                                 |
+| Package                                                             | Version | Usage                                                         |
+|---------------------------------------------------------------------|---------|---------------------------------------------------------------|
+| [sklearn](https://scikit-learn.org/stable/supervised_learning.html) | 1.0.2   | Used to implement several  machine learning algorithms.       |
+| [Numpy](https://numpy.org/)                                         | 1.21.5  | Uses for several calculations                                 |
+| [shap](https://shap.readthedocs.io/en/latest/index.html)            | 0.39.0  | Used to calculate and visualise shapely values                |
+| [xgboost](https://xgboost.readthedocs.io/en/stable/)                | 1.5.0   | Used to perform the xgboost algorithm on the data             |
+| [pandas](https://pandas.pydata.org/docs/)                           | 1.4.2   | Used to read data in the Preprocess module                    |
+| [re](https://docs.python.org/3/library/re.html)                     | 2.2.1   | Used to drop specific columns in the Preprocess module        |
+| [IPython](https://pypi.org/project/ipython/)                        | 8.3.0   | Used for it's display function                                |
+| [pca](https://pypi.org/project/pca/)                                | 1.8.2   | Used to perform pca and construct the scree and bi plot       |
+| [composition_stats](https://pypi.org/project/composition-stats/)    | 1.40-1  | Used for many functions in the Preprocess module              |
+| [matplotlib](https://matplotlib.org/)                               | 3.5.1   | Used to create a variety of plots                             |
+| [pickle](https://docs.python.org/3/library/pickle.html)             | 4.0     | Used to read the pickled data                                 |
+| [jinja2](https://jinja.palletsprojects.com/en/3.0.x/)               | 3.0.3   | Used by one of the other imports                              |
+| [requests](https://requests.readthedocs.io/en/latest/)              | 2.27.1  | Used by one of the other imports                              |
 
 
 ## Installation
@@ -114,7 +115,7 @@ The flowchart below depicts a schematic overview of the created pipeline.
 
 # Acknowledgements
 We would like to thank Dr. A. Vich Vila and S. Andreu Sanchez, MSc for their guidance during the course of the project. We would like
-to thank the UMCG for providing us with this project.
+to thank the UMCG for providing us with the opportunity to work on this project. 
 
 
 # License
