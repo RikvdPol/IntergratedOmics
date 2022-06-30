@@ -37,12 +37,12 @@ class StatsCalc:
         total_missing_perc = total_missing/total_datapoints * 100
         total_features = len(self.features.columns)
         
-        overview_df =  pd.DataFrame({
+        overview_df = pd.DataFrame({
             "Total missing values": [total_missing, total_missing_perc],
             "Total outliers": pd.Series([total_outlier, total_outlier_perc]),
             "Total datapoints": pd.Series(total_datapoints),
             "Total predictors": pd.Series(total_features)
-            }).rename(index= {0 : "Absolute number", 1:"Percentage in %"})
+            }).rename(index={0: "Absolute number", 1: "Percentage in %"})
         
         outliers_df = outliers_df.style.set_caption("Statistical overview dataset")
         return outliers_df, overview_df, total_outlier, total_missing, total_datapoints, total_features
@@ -100,7 +100,7 @@ class Recommondation(StatsCalc):
             print("This is a relatively small proportion of your dataset.\nThese outliers should remain in your dataset")
         else:
             print("This is a relatively large proportion of your dataset. \nIt is adviced to investigate the perhaps underlying reason of the outliers.")
-            print("If no underlying reason can be found, it is adviced to continue the program with the outliers.")
+            print("If no underlying reason can be found, it is advised to continue the program with the outliers.")
             
         # Dataset size
         print("\n### Dataset size\nXGBoost is a solid machine learning algorithm. Very large datasets will however require significant run time.")
@@ -175,13 +175,14 @@ class Recommondation(StatsCalc):
                 print("\n#### Error ####")
                 print("Only type the indicated symbol as input")
                 continue
-                
+
+
 def script_recommendation(df, features):
     stat_result = StatsCalc(df, features)    # Retrieve dataset and extracted features from preprocess.py
     outliers_df, overview_df, total_outlier, total_missing,total_datapoints, total_features = stat_result.return_stats()   # Retrieve stats info and display user the information
     test2 = Recommondation(df,features, outliers_df, overview_df, total_outlier, total_missing, total_datapoints, total_features)   
     advice = test2.provide_overview()  # Provide the user an overview of the dataset including the advice
-    end_result = test2.request_user_rec(advice) # Propose recommendation based on input and request options from user 
+    end_result = test2.request_user_rec(advice) # Propose recommendation based on input and request options from user
     return end_result
 
 
