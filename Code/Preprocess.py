@@ -16,7 +16,8 @@ import matplotlib.pyplot as plt
 from IPython.display import display
 import pickle
 
-class Preprocessing():
+
+class Preprocessing:
     "A class to sort the dataset with the first column as target and the remaining as features"
     def __init__(self, dataset):
         self.dataset = dataset
@@ -26,7 +27,6 @@ class Preprocessing():
         "and checks whether the sorted dataset is correct"
         while True:
             self.dataset = pd.DataFrame(self.dataset)
-            self.dataset = self.dataset.dropna()
             print("Your input dataset\n")
             display(self.dataset)
             request_target = str(input("Please provide the exact target columnname.\nYour input:"))
@@ -72,7 +72,7 @@ class Preprocessing():
             try:
                 if drop_answer == "y":
                     print("Type the exact column(s) that you want to drop in the following way:")
-                    print("Example: Age,Gende,Antibody_batch,UNKNOWN")
+                    print("Example: Age,Gender,Antibody_batch,UNKNOWN")
                     drop_col = input("Type in the columns")
                     drop_col = drop_col = re.sub(r"\s", "", drop_col).split(",")
                     end = self.dataset.drop(drop_col, axis = 1)
@@ -80,7 +80,7 @@ class Preprocessing():
                     return pd.DataFrame(end), target, features
                 
                 if drop_answer == "n":
-                    return pd.DataFrame(end) , target, features
+                    return pd.DataFrame(end), target, features
 
             except:
                 print("\n### Invalid input. Please carefully read the input requirements.")

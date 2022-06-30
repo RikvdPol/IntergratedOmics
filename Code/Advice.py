@@ -2,18 +2,20 @@
 author: Hicham Jemil
 """ 
 
+from IPython.display import display, HTML
 import pandas as pd
 import re
 import warnings
 warnings.simplefilter(action='ignore', category=FutureWarning)
-from IPython.display import display, HTML
 display(HTML("<style>.container { width:85% !important; }</style>"))
 
-class StatsCalc():
-    "Class to obtain statistical parameters of the dataset and to propose a recommondation"
-    "for future ML algorithms. The following details will be provided; Missing values, Outliers,"
-    "skewdness, number of columns"
-    def __init__(self, dataset,features):
+
+class StatsCalc:
+    """Class to obtain statistical parameters of the dataset and to propose a recommendation
+    for future ML algorithms. The following details will be provided; Missing values, Outliers,
+    skewness, number of columns"""
+
+    def __init__(self, dataset, features):
         self.dataset = dataset
         self.features = features
         
@@ -43,8 +45,9 @@ class StatsCalc():
             }).rename(index= {0 : "Absolute number", 1:"Percentage in %"})
         
         outliers_df = outliers_df.style.set_caption("Statistical overview dataset")
-        return outliers_df,overview_df,total_outlier, total_missing, total_datapoints, total_features
-    
+        return outliers_df, overview_df, total_outlier, total_missing, total_datapoints, total_features
+
+
 class Recommondation(StatsCalc):
     def __init__(self, 
                  dataset,
@@ -114,21 +117,25 @@ class Recommondation(StatsCalc):
         return PCA_advice
         
     def request_user_rec(self, PCA_advice):
-        "Requests whether the user want to peform the recommondationns"
+        "Requests whether the user want to peform the recommendations"
         "or their own specific options such as PCA, regularization or none."
         while True:
-            check_recommondation = input("\n#### Would you like to proceed with recommondations of this program?\nType y for Yes\nType n for No and to specify your own options\nYour input:").lower()
+            check_recommondation = input("\n#### Would you like to proceed with recommondations of this "
+                                         "program?\nType y for Yes\nType n for No and to specify your own "
+                                         "options\nYour input:").lower()
             try:
                 if check_recommondation == "y":
 #                     PCA_advice = PCA_advice   ## I coded it like this so that if there is an error we could know where the error is derived from
-                    print("Data processing will proceed according to the recommondation.")
+                    print("Data processing will proceed according to the recommendation.")
                     return PCA_advice
 
                 if check_recommondation == "n":
                     print("\n### Specify your selection.\nType \"p\" if you would like to perform PCA.")
-                    print("Type \"r\" if you would like to perform Regulatization.")
+                    print("Type \"r\" if you would like to perform Regularization.")
                     print("Type \"c\" if you want to continue to XGBoost without further preprocessing.")
-                    print("Note: If you want to perform both PCA and regularization, please provide your input in the desired order as follow:\n\tp,c  (if you want to perform first PCA and then regularization)")
+                    print("Note: If you want to perform both PCA and regularization, please provide your input in the "
+                          "desired order as follow:\n\tp,c  (if you want to perform first PCA and then "
+                          "regularization)")
                     while True:
                         check_user_req = input("\nYour input:").lower().strip()  #strips all the trailling and leading whitespaces and places it in a list
                         check_user_req = re.sub(r"\s", "", check_user_req)   # Use regex to remove all whitespaces 
@@ -154,8 +161,10 @@ class Recommondation(StatsCalc):
                             return PCA_advice
                         else:
                             print("### Error")
-                            print("Please only type for example \"p,r\" if you want to perform first PCA followed by Regularization.")
-                            print("You cannot select both option c (no further processing) and r (Regularization) or p (PCA) at the same time")
+                            print("Please only type for example \"p,r\" if you want to perform first PCA followed by "
+                                  "Regularization.")
+                            print("You cannot select both option c (no further processing) and r (Regularization) or "
+                                  "p (PCA) at the same time")
                             continue
                 else:
                     print("\n#### Error ####")
